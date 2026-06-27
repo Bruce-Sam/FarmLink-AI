@@ -52,6 +52,11 @@ export const listDemands = asyncHandler(async (req: Request, res: Response) => {
   successResponse(res, { message: 'Demands retrieved', data: { demands } });
 });
 
+export const getDemand = asyncHandler(async (req: Request, res: Response) => {
+  const demand = await buyersService.getDemand(requireUserId(req), getParam(req, 'demandId'));
+  successResponse(res, { message: 'Demand retrieved', data: { demand } });
+});
+
 export const updateDemand = asyncHandler(async (req: Request, res: Response) => {
   const input = updateDemandSchema.parse(req.body);
   const demand = await buyersService.updateDemand(requireUserId(req), getParam(req, 'demandId'), input);

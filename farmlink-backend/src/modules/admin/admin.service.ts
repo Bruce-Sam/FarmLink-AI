@@ -6,6 +6,7 @@ import {
 } from '@prisma/client';
 import { prisma } from '../../config/database';
 import { ApiError } from '../../utils/api-error';
+import { decimalToNumber } from '../../utils/money';
 import { safeUserSelect } from '../users/user.select';
 import { serializeListing } from '../listings/listings.serializer';
 import { serializeOffer, serializeTransaction } from '../offers/offers.serializer';
@@ -227,6 +228,73 @@ export class AdminService {
       prisma.auditLog.count(),
     ]);
     return { items, total };
+  }
+
+  async listDemands() {
+    const demands = await prisma.buyerDemand.findMany({
+      include: {
+        category: { select: { id: true, name: true } },
+        buyer: { select: { id: true, businessName: true } },
+      },
+      orderBy: { createdAt: 'desc' },
+    });
+
+    return demands.map((demand) => ({
+      id: demand.id,
+      buyerId: demand.buyerId,
+      buyerName: demand.buyer.businessName,
+      categoryId: demand.categoryId,
+      categoryName: demand.category.name,
+      minimumQuantity: decimalToNumber(demand.minimumQuantity) ?? 0,
+      maximumQuantity: decimalToNumber(demand.maximumQuantity),
+      unit: demand.unit,
+      preferredPriceMaximum: decimalToNumber(demand.preferredPriceMaximum),
+      requiredFrom: demand.requiredFrom?.toISOString() ?? null,
+      requiredUntil: demand.requiredUntil?.toISOString() ?? null,
+      preferredRegions: demand.preferredRegions,
+      isRecurring: demand.isRecurring,
+      frequency: demand.frequency,
+      isActive: demand.isActive,
+      createdAt: demand.createdAt.toISOString(),
+    }));
+  }
+
+  async listTransportSuggestions() {
+    const suggestions = await prisma.transportPoolSuggestion.findMany({
+      orderBy: { createdAt: 'desc' },
+      include: {
+        primaryListing: {
+          select: {
+            id: true,
+            title: true,
+            farmer: { select: { farmName: true } },
+          },
+        },
+        secondaryListing: {
+          select: {
+            id: true,
+            title: true,
+            farmer: { select: { farmName: true } },
+          },
+        },
+      },
+    });
+
+    return suggestions.map((suggestion) => ({
+      id: suggestion.id,
+      primaryListingId: suggestion.primaryListingId,
+      secondaryListingId: suggestion.secondaryListingId,
+      primaryTitle: suggestion.primaryListing.title,
+      secondaryTitle: suggestion.secondaryListing.title,
+      primaryFarmer: suggestion.primaryListing.farmer.farmName,
+      secondaryFarmer: suggestion.secondaryListing.farmer.farmName,
+      distanceBetweenFarmsKm: suggestion.distanceBetweenFarmsKm,
+      destinationSimilarityScore: suggestion.destinationSimilarityScore,
+      estimatedSavingsPercentage: suggestion.estimatedSavingsPercentage,
+      explanation: suggestion.explanation,
+      status: suggestion.status,
+      createdAt: suggestion.createdAt.toISOString(),
+    }));
   }
 }
 

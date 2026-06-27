@@ -5,6 +5,7 @@ import { useRouter } from 'next/navigation';
 import { ArrowLeftRight, ShoppingBasket, Sprout } from 'lucide-react';
 import { BUYER_ROUTES, FARMER_ROUTES } from '@/constants/routes';
 import { useAuth } from '@/hooks/use-auth';
+import { config } from '@/lib/config';
 import type { PortalRole } from '@/types/auth';
 import { cn } from '@/lib/utils';
 
@@ -41,6 +42,8 @@ export function PortalSwitcher({ target, className }: PortalSwitcherProps) {
   const hasTarget = target === 'farmer' ? isFarmer : isBuyer;
 
   if (!user) return null;
+
+  if (!config.isDemoMode) return null;
 
   if (!hasTarget) {
     return (

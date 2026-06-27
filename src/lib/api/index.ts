@@ -41,6 +41,8 @@ export {
   createListing,
   updateListing,
   patchListing,
+  publishListing,
+  cancelListing,
   deleteListing,
   getListingOffers,
 } from './listings.api';

@@ -41,7 +41,7 @@ export function ListingDetailView({ listingId }: ListingDetailViewProps) {
   const handleCancel = async () => {
     setIsCancelling(true);
     try {
-      await listingsApi.patchListing(listingId, { status: 'archived' });
+      await listingsApi.cancelListing(listingId);
       toast.success('Listing cancelled');
       query.refetch();
     } catch {

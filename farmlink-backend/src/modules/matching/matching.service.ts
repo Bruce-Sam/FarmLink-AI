@@ -1,5 +1,6 @@
 import { type Prisma, MatchStatus } from '@prisma/client';
 import { prisma } from '../../config/database';
+import { ApiError } from '../../utils/api-error';
 import { buyersService } from '../buyers/buyers.service';
 import { serializeListing } from '../listings/listings.serializer';
 import { type PaginationParams } from '../../utils/pagination';
@@ -54,6 +55,21 @@ export class MatchingService {
     }));
 
     return { items: recommendations, total };
+  }
+
+  async getBuyerRecommendation(userId: string, recommendationId: string) {
+    const buyerId = await buyersService.requireProfileId(userId);
+    const rec = await prisma.matchRecommendation.findUnique({
+      where: { id: recommendationId },
+      include: recommendationListingInclude,
+    });
+    if (!rec || rec.buyerId !== buyerId) {
+      throw ApiError.notFound('Recommendation not found');
+    }
+    return {
+      ...rec,
+      listing: serializeListing(rec.listing),
+    };
   }
 }
 

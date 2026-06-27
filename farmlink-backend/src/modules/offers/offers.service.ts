@@ -312,6 +312,16 @@ export class OffersService {
     return items.map(serializeTransaction);
   }
 
+  async getBuyerTransaction(userId: string, transactionId: string) {
+    const buyerId = await buyersService.requireProfileId(userId);
+    const tx = await prisma.produceTransaction.findUnique({
+      where: { id: transactionId },
+      include: { listing: { select: { id: true, title: true } } },
+    });
+    if (!tx || tx.buyerId !== buyerId) throw ApiError.notFound('Transaction not found');
+    return serializeTransaction(tx);
+  }
+
   async listFarmerTransactions(userId: string) {
     const farmerId = await farmersService.requireProfileId(userId);
     const items = await prisma.produceTransaction.findMany({
@@ -320,6 +330,16 @@ export class OffersService {
       include: { listing: { select: { id: true, title: true } } },
     });
     return items.map(serializeTransaction);
+  }
+
+  async getFarmerTransaction(userId: string, transactionId: string) {
+    const farmerId = await farmersService.requireProfileId(userId);
+    const tx = await prisma.produceTransaction.findUnique({
+      where: { id: transactionId },
+      include: { listing: { select: { id: true, title: true } } },
+    });
+    if (!tx || tx.farmerId !== farmerId) throw ApiError.notFound('Transaction not found');
+    return serializeTransaction(tx);
   }
 
   private buildOfferWhere(

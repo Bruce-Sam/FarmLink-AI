@@ -8,6 +8,7 @@ import { createFarmerProfile, getFarmerProfile, updateFarmerProfile } from './fa
 import {
   acceptOffer,
   getFarmerOffer,
+  getFarmerTransaction,
   listFarmerOffers,
   listFarmerTransactions,
   rejectOffer,
@@ -16,6 +17,7 @@ import { getFarmerTransportSuggestions } from '../transport/transport.controller
 
 const router = Router();
 const offerParam = { params: uuidParam('offerId') };
+const transactionParam = { params: uuidParam('transactionId') };
 
 router.use(authenticate, authorize(Role.FARMER));
 
@@ -29,6 +31,7 @@ router.post('/offers/:offerId/accept', validate(offerParam), acceptOffer);
 router.post('/offers/:offerId/reject', validate(offerParam), rejectOffer);
 
 router.get('/transactions', listFarmerTransactions);
+router.get('/transactions/:transactionId', validate(transactionParam), getFarmerTransaction);
 router.get('/transport-suggestions', getFarmerTransportSuggestions);
 
 export const farmersRoutes = router;

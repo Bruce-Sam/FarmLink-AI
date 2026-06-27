@@ -113,3 +113,13 @@ export const listAuditLogs = asyncHandler(async (req: Request, res: Response) =>
     meta: buildPaginationMeta(total, query.page, query.limit),
   });
 });
+
+export const listDemands = asyncHandler(async (_req: Request, res: Response) => {
+  const demands = await adminService.listDemands();
+  successResponse(res, { message: 'Demands retrieved', data: { demands } });
+});
+
+export const listTransportSuggestions = asyncHandler(async (_req: Request, res: Response) => {
+  const suggestions = await adminService.listTransportSuggestions();
+  successResponse(res, { message: 'Transport suggestions retrieved', data: { suggestions } });
+});

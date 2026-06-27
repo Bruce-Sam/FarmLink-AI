@@ -44,6 +44,14 @@ export const listBuyerTransactions = asyncHandler(async (req: Request, res: Resp
   successResponse(res, { message: 'Transactions retrieved', data: { transactions } });
 });
 
+export const getBuyerTransaction = asyncHandler(async (req: Request, res: Response) => {
+  const transaction = await offersService.getBuyerTransaction(
+    requireUserId(req),
+    getParam(req, 'transactionId'),
+  );
+  successResponse(res, { message: 'Transaction retrieved', data: { transaction } });
+});
+
 // ----- Farmer -----
 
 export const listFarmerOffers = asyncHandler(async (req: Request, res: Response) => {
@@ -74,4 +82,12 @@ export const rejectOffer = asyncHandler(async (req: Request, res: Response) => {
 export const listFarmerTransactions = asyncHandler(async (req: Request, res: Response) => {
   const transactions = await offersService.listFarmerTransactions(requireUserId(req));
   successResponse(res, { message: 'Transactions retrieved', data: { transactions } });
+});
+
+export const getFarmerTransaction = asyncHandler(async (req: Request, res: Response) => {
+  const transaction = await offersService.getFarmerTransaction(
+    requireUserId(req),
+    getParam(req, 'transactionId'),
+  );
+  successResponse(res, { message: 'Transaction retrieved', data: { transaction } });
 });

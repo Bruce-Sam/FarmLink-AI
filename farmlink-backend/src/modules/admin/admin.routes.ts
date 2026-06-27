@@ -9,10 +9,12 @@ import {
   getListing,
   getUser,
   listAuditLogs,
+  listDemands,
   listListings,
   listMatches,
   listOffers,
   listTransactions,
+  listTransportSuggestions,
   listUsers,
   regenerateMatches,
   updateListingStatus,
@@ -50,5 +52,7 @@ router.get('/offers', listOffers);
 router.get('/transactions', listTransactions);
 router.get('/matches', listMatches);
 router.get('/audit-logs', listAuditLogs);
+router.get('/demands', listDemands);
+router.get('/transport-suggestions', listTransportSuggestions);
 
 export const adminRoutes = router;

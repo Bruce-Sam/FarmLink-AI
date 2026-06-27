@@ -126,7 +126,7 @@ export function AIExtractionReview() {
       setBackendListingId(listing.id);
 
       if (publishAfter) {
-        await listingsApi.patchListing(listing.id, { status: 'active' });
+        await listingsApi.publishListing(listing.id);
         router.push(`/farmer/list-produce/success?id=${listing.id}`);
       } else {
         toast.success('Listing saved as draft');

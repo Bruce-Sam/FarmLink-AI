@@ -26,3 +26,7 @@ export const me = asyncHandler(async (req: Request, res: Response) => {
   const user = await authService.getCurrentUser(req.user.id);
   successResponse(res, { message: 'Current user retrieved', data: { user } });
 });
+
+export const logout = asyncHandler(async (_req: Request, res: Response) => {
+  successResponse(res, { message: 'Logged out successfully', data: { loggedOut: true } });
+});

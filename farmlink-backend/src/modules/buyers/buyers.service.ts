@@ -66,6 +66,16 @@ export class BuyersService {
     });
   }
 
+  async getDemand(userId: string, demandId: string) {
+    await this.requireOwnedDemand(userId, demandId);
+    const demand = await prisma.buyerDemand.findUnique({
+      where: { id: demandId },
+      include: { category: { select: { id: true, name: true, slug: true } } },
+    });
+    if (!demand) throw ApiError.notFound('Demand not found');
+    return demand;
+  }
+
   private async requireOwnedDemand(userId: string, demandId: string): Promise<string> {
     const buyerId = await this.requireProfileId(userId);
     const demand = await prisma.buyerDemand.findUnique({

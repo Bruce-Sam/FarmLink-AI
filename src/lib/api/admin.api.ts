@@ -122,7 +122,7 @@ export async function listAuditLogs(
   return { auditLogs: res.data.auditLogs, meta: asPaginationMeta(res.meta) };
 }
 
-/** Demands and transport have no admin backend endpoints yet — mock mode only. */
+/** Demands and transport suggestions from the live admin API. */
 export async function listDemands(): Promise<AdminDemand[]> {
   const res = await apiGet<{ demands: AdminDemand[] }>('/admin/demands');
   return res.data.demands;
