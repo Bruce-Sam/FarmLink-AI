@@ -41,11 +41,15 @@ git push origin master
    |-------|--------|
    | Name | `afuo-market-api` |
    | Root Directory | `farmlink-backend` |
-   | Runtime | **Docker** |
+   | Runtime | **Node** |
    | Region | **Frankfurt** (near Supabase eu-west-1) |
-   | Branch | `master` |
+   | Branch | `main` |
    | Health Check Path | `/health` |
+   | **Build Command** | `npm install --include=dev && npm run render:build` |
+   | **Start Command** | `npm run render:start` |
    | Instance type | Free (or Starter $7/mo to avoid cold starts) |
+
+   > **Note:** Do not use the default `npm install; npm run build` — production installs skip devDependencies and TypeScript will fail. Docker also works if you prefer; use the Dockerfile in `farmlink-backend/`.
 
 4. **Environment variables** (Environment tab):
 

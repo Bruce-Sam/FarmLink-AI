@@ -1,17 +1,17 @@
 # Render Blueprint — Afuo Market API
-# Docs: https://render.com/docs/blueprint-spec
+# https://render.com/docs/blueprint-spec
 #
-# After deploy, set CORS_ORIGINS to your Vercel URL(s), e.g.:
-#   https://afuo-market.vercel.app,https://www.yourdomain.com
+# Use runtime: node (recommended) OR runtime: docker (Dockerfile in this folder).
 
 services:
   - type: web
     name: afuo-market-api
-    runtime: docker
-    dockerfilePath: ./Dockerfile
-    dockerContext: .
+    runtime: node
+    rootDir: farmlink-backend
     region: frankfurt
     plan: free
+    buildCommand: npm install --include=dev && npm run render:build
+    startCommand: npm run render:start
     healthCheckPath: /health
     envVars:
       - key: NODE_ENV
