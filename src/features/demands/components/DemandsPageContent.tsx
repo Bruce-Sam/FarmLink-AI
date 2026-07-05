@@ -144,7 +144,7 @@ export function DemandsPageContent() {
     <div className="space-y-6 px-4 py-6 lg:px-8">
       <PageHeader
         title="Procurement demands"
-        subtitle="Tell FarmLink what produce you need and when"
+        subtitle="Tell Afuo Market what produce you need and when"
         actions={
           <Button asChild className="bg-market-green hover:bg-market-green/90">
             <Link href={BUYER_ROUTES.demandNew}>
@@ -158,7 +158,7 @@ export function DemandsPageContent() {
       {sortedDemands.length === 0 ? (
         <EmptyState
           title="No demands yet"
-          description="Create a produce demand so FarmLink can recommend matching farmer listings."
+          description="Create a produce demand so Afuo Market can recommend matching farmer listings."
           actionLabel="Create demand"
           actionHref={BUYER_ROUTES.demandNew}
         />

@@ -52,7 +52,7 @@ export function TextListingInput() {
       setExtractionResult(result);
       router.push('/farmer/list-produce/review');
     } catch {
-      setError('FarmLink could not extract details right now. Try again or fill the form manually.');
+      setError('Afuo Market could not extract details right now. Try again or fill the form manually.');
     } finally {
       setIsExtracting(false);
     }

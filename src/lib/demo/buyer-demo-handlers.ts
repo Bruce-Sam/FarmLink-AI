@@ -23,6 +23,7 @@ import {
   demoMarketplaceListings,
   DEMO_BUYER_ID,
 } from './buyer-demo-data';
+import { handleRatingsDemoRequest } from './ratings-demo-handlers';
 
 function ok<T>(data: T, message?: string): ApiResponse<T> {
   return { data, message };
@@ -132,6 +133,14 @@ export async function handleBuyerDemoRequest<T>(
 ): Promise<ApiResponse<T> | null> {
   const normalizedPath = path.startsWith('/') ? path : `/${path}`;
   const demoCurrentUser = getDemoCurrentUser();
+
+  const ratingsMock = handleRatingsDemoRequest<T>(
+    method,
+    normalizedPath,
+    body,
+    demoCurrentUser?.id,
+  );
+  if (ratingsMock) return ok(ratingsMock.data, ratingsMock.message);
 
   if (normalizedPath === '/buyers/profile' && method === 'GET') {
     const profile = getBuyerProfileForCurrentUser();

@@ -30,7 +30,7 @@ export function PublishConfirmationDialog({
         <AlertDialogHeader>
           <AlertDialogTitle>Publish this produce listing?</AlertDialogTitle>
           <AlertDialogDescription>
-            FarmLink will make it available to suitable buyers and generate buyer
+            Afuo Market will make it available to suitable buyers and generate buyer
             recommendations. You can still edit or cancel later if needed.
           </AlertDialogDescription>
         </AlertDialogHeader>

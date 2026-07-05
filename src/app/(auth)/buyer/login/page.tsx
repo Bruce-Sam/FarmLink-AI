@@ -94,7 +94,7 @@ export default function BuyerLoginPage() {
             </div>
             <BuyerLoginForm onSuccess={() => router.replace(BUYER_ROUTES.home)} />
             <p className="text-center text-sm text-ledger-grey">
-              New to FarmLink?{' '}
+              New to Afuo Market?{' '}
               <Link href={BUYER_ROUTES.signup} className="font-medium text-market-green hover:underline">
                 Create a buyer account
               </Link>
@@ -104,7 +104,7 @@ export default function BuyerLoginPage() {
               </Link>
             </p>
             <p className="text-xs text-ledger-grey">
-              Your session is secured. FarmLink never stores your password in plain text.
+              Your session is secured. Afuo Market never stores your password in plain text.
             </p>
           </div>
         </section>

@@ -31,7 +31,7 @@ export function ListProduceEntry() {
     <div className="mx-auto max-w-2xl px-4 py-5">
       <PageHeader
         title="List produce"
-        subtitle="Choose how you want to tell FarmLink about your harvest."
+        subtitle="Choose how you want to tell Afuo Market about your harvest."
       />
       <div className="mt-8 space-y-4">
         {options.map(({ href, label, description, icon: Icon, recommended }) => (

@@ -21,6 +21,7 @@ import { PageHeader } from '@/components/layout/PageHeader';
 import { EmptyState } from '@/components/feedback/EmptyState';
 import { ErrorState } from '@/components/feedback/ErrorState';
 import { LoadingSkeleton } from '@/components/feedback/LoadingSkeleton';
+import { ListingPhotoGallery } from '@/components/listings/ListingPhotoGallery';
 import { PriceDisplay } from '@/components/marketplace/PriceDisplay';
 import { MatchScoreStrip } from '@/components/offers/MatchScoreStrip';
 import { Button } from '@/components/ui/button';
@@ -73,10 +74,16 @@ function MarketplaceListingRow({
         'border-soft-border transition-colors hover:bg-produce-cream/40 dark:hover:bg-deep-grove/20',
         viewMode === 'list'
           ? 'flex flex-col gap-4 border-b py-5 sm:flex-row sm:items-center sm:justify-between'
-          : 'supply-band border p-4',
+          : 'supply-band flex flex-col gap-3 border p-4',
       )}
     >
-      <div className="min-w-0 flex-1 space-y-2">
+      <div className="flex min-w-0 flex-1 gap-4">
+        <ListingPhotoGallery
+          variant="thumbnail"
+          images={listing.images}
+          title={listing.title}
+        />
+        <div className="min-w-0 flex-1 space-y-2">
         <div className="flex flex-wrap items-center gap-2">
           <Link
             href={BUYER_ROUTES.marketplaceDetail(listing.id)}
@@ -113,6 +120,7 @@ function MarketplaceListingRow({
         {listing.matchScore != null && (
           <MatchScoreStrip score={listing.matchScore} className="max-w-xs" />
         )}
+        </div>
       </div>
       <div className="flex shrink-0 flex-wrap items-center gap-2">
         <Button

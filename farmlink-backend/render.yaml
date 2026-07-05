@@ -1,0 +1,38 @@
+# Render Blueprint — Afuo Market API
+# Docs: https://render.com/docs/blueprint-spec
+#
+# After deploy, set CORS_ORIGINS to your Vercel URL(s), e.g.:
+#   https://afuo-market.vercel.app,https://www.yourdomain.com
+
+services:
+  - type: web
+    name: afuo-market-api
+    runtime: docker
+    dockerfilePath: ./Dockerfile
+    dockerContext: .
+    region: frankfurt
+    plan: free
+    healthCheckPath: /health
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: '4000'
+      - key: DATABASE_URL
+        sync: false
+      - key: JWT_ACCESS_SECRET
+        generateValue: true
+      - key: JWT_ACCESS_EXPIRES_IN
+        value: 7d
+      - key: CORS_ORIGINS
+        sync: false
+      - key: LOG_LEVEL
+        value: info
+      - key: AI_PROVIDER
+        value: local
+      - key: RATE_LIMIT_WINDOW_MS
+        value: '900000'
+      - key: RATE_LIMIT_MAX
+        value: '300'
+      - key: AUTH_RATE_LIMIT_MAX
+        value: '20'

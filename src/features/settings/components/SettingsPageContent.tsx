@@ -25,7 +25,7 @@ export function SettingsPageContent() {
 
   const handleClearData = async () => {
     await clearAllDrafts();
-    localStorage.removeItem('farmlink-onboarding-progress');
+    localStorage.removeItem('Afuo Market-onboarding-progress');
     toast.success('Local data cleared from this device');
     setShowClear(false);
   };
@@ -56,11 +56,11 @@ export function SettingsPageContent() {
         <section className="rounded-2xl border border-morning-mist bg-warm-paper p-5">
           <h2 className="font-heading font-semibold">Install application</h2>
           <p className="mt-2 text-sm text-muted-text">
-            Add FarmLink to your home screen for quick access in the field.
+            Add Afuo Market to your home screen for quick access in the field.
           </p>
           {isInstallable && (
             <Button className="mt-4" onClick={() => promptInstall()}>
-              Install FarmLink
+              Install Afuo Market
             </Button>
           )}
         </section>

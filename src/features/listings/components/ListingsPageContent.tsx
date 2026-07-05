@@ -37,7 +37,7 @@ export function ListingsPageContent() {
 
   return (
     <div className="mx-auto max-w-3xl px-4 py-5">
-      <PageHeader title="My listings" subtitle="Your produce on FarmLink" />
+      <PageHeader title="My listings" subtitle="Your produce on Afuo Market" />
 
       <Tabs value={filter} onValueChange={setFilter} className="mt-6">
         <TabsList className="w-full flex-wrap justify-start">
@@ -53,7 +53,7 @@ export function ListingsPageContent() {
             {listings.length === 0 ? (
               <EmptyState
                 title="No produce listed yet"
-                description="Tell FarmLink what you have available and we will help you find suitable buyers."
+                description="Tell Afuo Market what you have available and we will help you find suitable buyers."
                 actionLabel="List produce"
                 actionHref="/farmer/list-produce"
               />

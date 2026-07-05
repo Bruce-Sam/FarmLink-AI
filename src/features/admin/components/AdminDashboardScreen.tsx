@@ -66,7 +66,7 @@ export function AdminDashboardScreen() {
         description="Harvest Intelligence Command Centre — real-time marketplace health, match quality, and operational pulse across Ghana."
         actions={
           <Button variant="outline" asChild>
-            <Link href={ADMIN_ROUTES.analytics}>View analytics</Link>
+            <Link href={ADMIN_ROUTES.analytics}>Full statistical analysis</Link>
           </Button>
         }
       />

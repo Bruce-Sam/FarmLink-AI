@@ -8,7 +8,7 @@ import {
   setRefreshToken,
 } from './token-storage';
 
-const SESSION_USER_KEY = 'farmlink_session_user';
+const SESSION_USER_KEY = 'Afuo Market_session_user';
 
 function getSessionStorage(): Storage | null {
   if (typeof window === 'undefined') return null;

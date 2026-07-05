@@ -13,6 +13,8 @@ import {
   getPortalRoleSignupPath,
 } from '@/features/auth/utils/role-validation';
 import { config } from '@/lib/config';
+import { seedCredentialHint } from '@/constants/seed-credentials';
+import { ApiHealthBanner } from '@/components/feedback/ApiHealthBanner';
 import { cn } from '@/lib/utils';
 import { Button } from '@/components/ui/button';
 import { Checkbox } from '@/components/ui/checkbox';
@@ -55,7 +57,7 @@ export function FarmerLoginForm({ onSuccess, className }: FarmerLoginFormProps) 
   const onSubmit = async (values: LoginFormValues) => {
     if (!isOnline) {
       setSubmitError(
-        'You are offline. Connect to the internet to sign in to your FarmLink account.',
+        'You are offline. Connect to the internet to sign in to your Afuo Market account.',
       );
       return;
     }
@@ -90,6 +92,8 @@ export function FarmerLoginForm({ onSuccess, className }: FarmerLoginFormProps) 
       className={cn('space-y-5', className)}
       noValidate
     >
+      {!config.isDemoMode && <ApiHealthBanner className="mb-1" />}
+
       {!isOnline && (
         <div
           role="status"
@@ -192,7 +196,9 @@ export function FarmerLoginForm({ onSuccess, className }: FarmerLoginFormProps) 
       <p className="text-center text-xs text-muted-foreground">
         {config.isDemoMode
           ? 'Demo farmer: kwame.mensah@example.com or 0244123456 · any password (6+ characters)'
-          : 'Use your registered farmer email or phone and password.'}
+          : config.isDevelopment
+            ? `Dev account: ${seedCredentialHint('farmer')}`
+            : 'Use your registered farmer email or phone and password.'}
       </p>
     </form>
   );

@@ -17,7 +17,7 @@ describe('Admin auth helpers', () => {
   it('maps backend admin user to session user', () => {
     const sessionUser = mapBackendUserToSessionUser(adminDemoUser);
     expect(sessionUser.role).toBe('admin');
-    expect(sessionUser.fullName).toBe('FarmLink Administrator');
+    expect(sessionUser.fullName).toBe('Afuo Market Administrator');
     expect(sessionUser.email).toBe('admin@farmlink.local');
   });
 

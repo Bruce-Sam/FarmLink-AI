@@ -54,7 +54,7 @@ export function MatchesListView({ listingId }: MatchesListViewProps) {
         <EmptyState
           className="mt-8"
           title="No matches yet"
-          description="FarmLink is still checking for suitable buyers for this listing."
+          description="Afuo Market is still checking for suitable buyers for this listing."
         />
       ) : (
         <div className="mt-6 space-y-4">

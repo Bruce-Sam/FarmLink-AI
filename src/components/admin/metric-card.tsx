@@ -1,4 +1,5 @@
 import type { LucideIcon } from 'lucide-react';
+import type { ReactNode } from 'react';
 import { cn } from '@/lib/utils';
 import { Card, CardContent } from '@/components/ui/card';
 import { Skeleton } from '@/components/ui/skeleton';
@@ -6,7 +7,7 @@ import { Skeleton } from '@/components/ui/skeleton';
 interface MetricCardProps {
   label: string;
   value: string | number;
-  hint?: string;
+  hint?: ReactNode;
   icon?: LucideIcon;
   trend?: { value: string; positive?: boolean };
   className?: string;

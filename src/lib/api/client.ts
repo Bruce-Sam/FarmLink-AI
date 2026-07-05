@@ -33,7 +33,7 @@ export function normalizeApiError(error: unknown): ApiError {
       return {
         message: config.isDemoMode
           ? 'Could not complete the request in demo mode. Try refreshing the page.'
-          : `Cannot reach the FarmLink API at ${config.apiUrl}. Start the backend server, or set NEXT_PUBLIC_ENABLE_DEMO_MODE=true in .env.local and restart npm run dev.`,
+          : `Cannot reach the Afuo Market API at ${config.apiUrl}. Start the backend server, or set NEXT_PUBLIC_ENABLE_DEMO_MODE=true in .env.local and restart npm run dev.`,
         code: 'NETWORK_ERROR',
       };
     }

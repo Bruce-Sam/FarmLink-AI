@@ -182,7 +182,7 @@ export function DemandDetailView({ demandId }: DemandDetailViewProps) {
           <div className="mt-4">
             <EmptyState
               title="No matching supply yet"
-              description="FarmLink will notify you when farmer listings align with this demand."
+              description="Afuo Market will notify you when farmer listings align with this demand."
               actionLabel="Browse marketplace"
               actionHref={BUYER_ROUTES.marketplace}
             />

@@ -9,6 +9,7 @@ import type {
   ListingUpdatePayload,
 } from '@/types/listing';
 import type { OfferActionPayload } from '@/types/offer';
+import { handleRatingsDemoRequest } from './ratings-demo-handlers';
 import {
   addPortalRoleToCurrentUser,
   getDemoCurrentUser,
@@ -75,6 +76,14 @@ export async function handleDemoRequest<T>(
   await delay();
 
   const normalizedPath = path.startsWith('/') ? path : `/${path}`;
+
+  const ratingsMock = handleRatingsDemoRequest<T>(
+    method,
+    normalizedPath,
+    body,
+    getDemoCurrentUser()?.id,
+  );
+  if (ratingsMock) return ok(ratingsMock.data, ratingsMock.message);
 
   const adminMock = await handleAdminDemoRequest<T>(method, normalizedPath, body);
   if (adminMock) return adminMock;

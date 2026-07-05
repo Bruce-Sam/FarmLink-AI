@@ -423,6 +423,6 @@ export interface BuyerOnboardingProgress {
 
 
 
-export const BUYER_ONBOARDING_PROGRESS_KEY = 'farmlink-buyer-onboarding-progress';
+export const BUYER_ONBOARDING_PROGRESS_KEY = 'Afuo Market-buyer-onboarding-progress';
 
 

@@ -1,4 +1,4 @@
-// FarmLink AI — Prisma schema
+// FarmLink — Prisma schema
 // Modular monolith backend for a Ghana-focused agricultural marketplace.
 
 generator client {
@@ -120,6 +120,11 @@ enum NotificationType {
   SYSTEM
 }
 
+enum RatedRole {
+  FARMER
+  BUYER
+}
+
 // ---------------------------------------------------------------------------
 // Models
 // ---------------------------------------------------------------------------
@@ -138,10 +143,12 @@ model User {
   updatedAt       DateTime      @updatedAt
   lastLoginAt     DateTime?
 
-  farmerProfile FarmerProfile?
-  buyerProfile  BuyerProfile?
-  notifications Notification[]
-  auditLogs     AuditLog[]
+  farmerProfile    FarmerProfile?
+  buyerProfile     BuyerProfile?
+  notifications    Notification[]
+  auditLogs        AuditLog[]
+  ratingsGiven     PartnerRating[] @relation("RatingsGiven")
+  ratingsReceived  PartnerRating[] @relation("RatingsReceived")
 
   @@index([role])
   @@index([accountStatus])
@@ -245,6 +252,7 @@ model ProduceListing {
   rawInputText          String?
   aiExtractionConfidence Float?
   publishedAt           DateTime?
+  imageUrls             String[]          @default([])
   createdAt             DateTime          @default(now())
   updatedAt             DateTime          @updatedAt
 
@@ -359,10 +367,31 @@ model ProduceTransaction {
   createdAt          DateTime          @default(now())
   updatedAt          DateTime          @updatedAt
 
+  ratings PartnerRating[]
+
   @@index([farmerId])
   @@index([buyerId])
   @@index([listingId])
   @@index([status])
+}
+
+model PartnerRating {
+  id            String             @id @default(uuid())
+  transactionId String
+  transaction   ProduceTransaction @relation(fields: [transactionId], references: [id], onDelete: Cascade)
+  raterUserId   String
+  rater         User               @relation("RatingsGiven", fields: [raterUserId], references: [id], onDelete: Cascade)
+  ratedUserId   String
+  rated         User               @relation("RatingsReceived", fields: [ratedUserId], references: [id], onDelete: Cascade)
+  ratedRole     RatedRole
+  score         Int
+  comment       String?
+  createdAt     DateTime           @default(now())
+
+  @@unique([transactionId, raterUserId])
+  @@index([ratedUserId])
+  @@index([ratedRole])
+  @@index([createdAt])
 }
 
 model TransportPoolSuggestion {

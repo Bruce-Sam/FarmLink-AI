@@ -13,11 +13,11 @@ const topics = [
   },
   {
     title: 'How AI extraction works',
-    body: 'FarmLink reads your description and suggests fields. It is not guaranteed correct — always check before publishing.',
+    body: 'Afuo Market reads your description and suggests fields. It is not guaranteed correct — always check before publishing.',
   },
   {
     title: 'How buyer matching works',
-    body: 'After you publish, FarmLink finds buyers whose needs fit your produce, quantity and timing.',
+    body: 'After you publish, Afuo Market finds buyers whose needs fit your produce, quantity and timing.',
   },
   {
     title: 'How offers work',
@@ -37,7 +37,7 @@ const topics = [
   },
   {
     title: 'Payments (MVP)',
-    body: 'Payment settlement happens outside FarmLink for now. FarmLink does not process MoMo or bank payments yet.',
+    body: 'Payment settlement happens outside Afuo Market for now. Afuo Market does not process MoMo or bank payments yet.',
   },
 ];
 

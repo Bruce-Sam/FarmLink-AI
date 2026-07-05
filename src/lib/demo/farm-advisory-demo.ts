@@ -443,7 +443,7 @@ function handleGeneral(messages: AdvisoryMessage[]): AdvisoryChatResponse {
 
   if (isFirstTurn) {
     return respond(
-      `I'm your FarmLink farm advisor. Describe what you're seeing — crop, symptoms, and how long it's been happening — and I'll help you work out likely causes and next steps.
+      `I'm your Afuo Market farm advisor. Describe what you're seeing — crop, symptoms, and how long it's been happening — and I'll help you work out likely causes and next steps.
 
 For example: "My plantain leaves are turning black" or "Tomatoes have brown spots after the rains."
 

@@ -42,14 +42,14 @@ export function TransportSuggestionsPage() {
 
       <p className="mt-4 rounded-xl bg-morning-mist px-4 py-3 text-sm text-muted-text">
         Transport pooling is an estimated recommendation based on farm proximity and pickup timing.
-        Exact savings are only shown when provided by FarmLink.
+        Exact savings are only shown when provided by Afuo Market.
       </p>
 
       {suggestions.length === 0 ? (
         <EmptyState
           className="mt-8"
           title="No pooling suggestions yet"
-          description="When another farmer nearby has a similar pickup date, FarmLink will suggest shared transport."
+          description="When another farmer nearby has a similar pickup date, Afuo Market will suggest shared transport."
         />
       ) : (
         <div className="mt-6 space-y-4">

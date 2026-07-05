@@ -4,6 +4,7 @@ import Link from 'next/link';
 import { useQuery } from '@tanstack/react-query';
 import { transactionsApi } from '@/lib/api';
 import { queryKeys } from '@/lib/query/keys';
+import { TransactionRatingPanel } from '@/components/ratings/TransactionRatingPanel';
 import { PageHeader } from '@/components/layout/PageHeader';
 import { LoadingSkeleton } from '@/components/feedback/LoadingSkeleton';
 import { ErrorState } from '@/components/feedback/ErrorState';
@@ -71,8 +72,15 @@ export function TransactionDetailView({ transactionId }: TransactionDetailViewPr
       </section>
 
       <p className="mt-6 rounded-xl bg-morning-mist px-4 py-3 text-sm text-muted-text">
-        Payment settlement is handled outside FarmLink in the current MVP.
+        Payment settlement is handled outside Afuo Market in the current MVP.
       </p>
+
+      <TransactionRatingPanel
+        transactionId={txn.id}
+        status={txn.status}
+        portal="farmer"
+        counterpartyName={txn.buyerName}
+      />
 
       <Link
         href={`/farmer/listings/${txn.listingId}`}

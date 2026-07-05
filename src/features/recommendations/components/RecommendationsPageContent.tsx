@@ -202,7 +202,7 @@ export function RecommendationsPageContent() {
           title="No recommendations match your filters"
           description={
             (query.data?.length ?? 0) === 0
-              ? 'Create a produce demand so FarmLink can find suitable farmer listings for your business.'
+              ? 'Create a produce demand so Afuo Market can find suitable farmer listings for your business.'
               : 'Try adjusting your filters to see more matches.'
           }
           actionLabel={(query.data?.length ?? 0) === 0 ? 'Create demand' : undefined}

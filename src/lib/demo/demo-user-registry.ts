@@ -85,7 +85,7 @@ function createEphemeralUser(identifier: string, portal: PortalRole): User {
     id: `user-${Date.now()}`,
     email: isEmail ? identifier : `${identifier}@farmlink.demo`,
     phone: isEmail ? undefined : identifier,
-    fullName: isEmail ? identifier.split('@')[0] : 'FarmLink User',
+    fullName: isEmail ? identifier.split('@')[0] : 'Afuo Market User',
     role: portal,
     roles: [portal],
     createdAt: now,

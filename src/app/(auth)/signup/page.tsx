@@ -3,7 +3,8 @@
 import Link from 'next/link';
 import { ArrowRight, ShoppingBasket, Sprout } from 'lucide-react';
 import { DemoModeIndicator } from '@/components/feedback/DemoModeIndicator';
-import { BrandMark } from '@/components/brand/BrandMark';
+import { AfuoPortalMark } from '@/components/brand/AfuoPortalMark';
+import { BRAND_NAME } from '@/constants/brand';
 import { BUYER_ROUTES, FARMER_ROUTES } from '@/constants/routes';
 import { cn } from '@/lib/utils';
 
@@ -35,14 +36,14 @@ export default function SignupPage() {
     <div className="min-h-dvh bg-field-cream dark:bg-exchange-ink">
       <DemoModeIndicator />
       <div className="mx-auto flex min-h-dvh max-w-3xl flex-col px-5 py-10 sm:px-8">
-        <BrandMark />
+        <AfuoPortalMark useFullLogo subtitle="Choose your portal to get started" />
         <div className="my-10 flex-1 space-y-8">
           <div className="space-y-3">
             <h1 className="font-heading text-3xl font-bold text-field-ink dark:text-produce-cream">
-              Join FarmLink AI
+              Join {BRAND_NAME}
             </h1>
             <p className="max-w-xl text-muted-text">
-              Choose how you use FarmLink — as a farmer supplying produce, or as a buyer sourcing
+              Choose how you use {BRAND_NAME} — as a farmer supplying produce, or as a buyer sourcing
               it for your business.
             </p>
           </div>

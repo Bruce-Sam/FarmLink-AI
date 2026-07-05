@@ -77,7 +77,7 @@ export function BuyerHomeScreen() {
             {data.demandCoverage.length === 0 ? (
               <EmptyState
                 title="No active demands"
-                description="Create a produce demand so FarmLink can find suitable farmer listings."
+                description="Create a produce demand so Afuo Market can find suitable farmer listings."
                 actionLabel="Create demand"
                 actionHref={BUYER_ROUTES.demandNew}
               />
@@ -113,7 +113,7 @@ export function BuyerHomeScreen() {
           <div className="mt-4">
             <EmptyState
               title="No recommended supply yet"
-              description="Create a produce demand so FarmLink can find suitable farmer listings for your business."
+              description="Create a produce demand so Afuo Market can find suitable farmer listings for your business."
               actionLabel="Create demand"
               actionHref={BUYER_ROUTES.demandNew}
             />

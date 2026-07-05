@@ -27,7 +27,7 @@ import {
 } from '@/components/ui/alert-dialog';
 import { usePwaInstall } from '@/hooks/use-pwa-install';
 
-const BUYER_PREFS_KEY = 'farmlink-buyer-local-preferences';
+const BUYER_PREFS_KEY = 'Afuo Market-buyer-local-preferences';
 
 interface BuyerLocalPreferences {
   compactNav: boolean;
@@ -82,7 +82,7 @@ export function BuyerSettingsPageContent() {
 
   const handleClearData = () => {
     localStorage.removeItem(BUYER_PREFS_KEY);
-    localStorage.removeItem('farmlink-buyer-onboarding-progress');
+    localStorage.removeItem('Afuo Market-buyer-onboarding-progress');
     setPrefs(DEFAULT_PREFS);
     toast.success('Local buyer preferences cleared from this device');
     setShowClear(false);
@@ -187,11 +187,11 @@ export function BuyerSettingsPageContent() {
       <section className="rounded-2xl border border-soft-border bg-warm-paper p-5 dark:bg-deep-grove/20">
         <h2 className="font-heading font-semibold">Install application</h2>
         <p className="mt-2 text-sm text-ledger-grey">
-          Add FarmLink Buyer to your home screen for quick procurement access.
+          Add Afuo Market Buyer to your home screen for quick procurement access.
         </p>
         {isInstallable && (
           <Button className="mt-4 bg-market-green hover:bg-market-green/90" onClick={() => promptInstall()}>
-            Install FarmLink
+            Install Afuo Market
           </Button>
         )}
       </section>

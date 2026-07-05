@@ -3,8 +3,10 @@
 import Link from 'next/link';
 import { ArrowRight, LogIn, ShoppingBasket, Sprout, UserPlus } from 'lucide-react';
 import { DemoModeIndicator } from '@/components/feedback/DemoModeIndicator';
-import { BrandMark } from '@/components/brand/BrandMark';
+import { ApiHealthBanner } from '@/components/feedback/ApiHealthBanner';
+import { AfuoPortalMark } from '@/components/brand/AfuoPortalMark';
 import { AUTH_ROUTES, BUYER_ROUTES, FARMER_ROUTES } from '@/constants/routes';
+import { seedCredentialHint } from '@/constants/seed-credentials';
 import { config } from '@/lib/config';
 import { cn } from '@/lib/utils';
 
@@ -18,6 +20,7 @@ const portals = [
     icon: Sprout,
     accent: 'border-farm-green/30 bg-farm-green/5 hover:border-farm-green',
     demoHint: 'Demo: kwame.mensah@example.com or 0244123456',
+    devHint: seedCredentialHint('farmer'),
   },
   {
     role: 'buyer' as const,
@@ -28,6 +31,7 @@ const portals = [
     icon: ShoppingBasket,
     accent: 'border-market-green/30 bg-market-green/5 hover:border-market-green',
     demoHint: 'Demo: orders@goldenspoon.gh or 0244555667',
+    devHint: seedCredentialHint('buyer'),
   },
 ];
 
@@ -36,20 +40,31 @@ export default function HomePage() {
     <div className="min-h-dvh bg-field-cream dark:bg-exchange-ink">
       <DemoModeIndicator />
       <div className="mx-auto flex min-h-dvh max-w-3xl flex-col px-5 py-10 sm:px-8">
-        <BrandMark />
+        <AfuoPortalMark useFullLogo />
+        {!config.isDemoMode && (
+          <div className="mt-4">
+            <ApiHealthBanner />
+          </div>
+        )}
         <div className="my-10 flex-1 space-y-8">
           <div className="space-y-3">
-            <h1 className="font-heading text-3xl font-bold text-field-ink dark:text-produce-cream">
-              FarmLink AI
+            <h1 className="font-heading text-2xl font-bold text-field-ink dark:text-produce-cream sm:text-3xl">
+              Ghana&apos;s farm-to-marketplace
             </h1>
             <p className="max-w-xl text-muted-text">
-              Connect Ghana&apos;s farmers with buyers. One account can sell produce and buy from
-              others — choose a portal to sign in or add a second role.
+              Connect Ghana&apos;s farmers with buyers. Each account is tied to one portal — sign in
+              as a farmer to list produce, or as a buyer to source harvest.
             </p>
             {config.isDemoMode && (
               <p className="rounded-lg border border-farm-green/30 bg-farm-green/5 px-4 py-3 text-sm text-field-ink dark:text-produce-cream">
                 Demo mode is on — use any valid Ghana phone or email with a password of 6+
                 characters, or the sample accounts below.
+              </p>
+            )}
+            {config.isDevelopment && !config.isDemoMode && (
+              <p className="rounded-lg border border-farm-green/30 bg-farm-green/5 px-4 py-3 text-sm text-field-ink dark:text-produce-cream">
+                Live API mode — use the seeded dev accounts on each sign-in page, or register a new
+                account. Admin: {seedCredentialHint('admin')}
               </p>
             )}
           </div>
@@ -69,6 +84,9 @@ export default function HomePage() {
                   <p className="mt-2 flex-1 text-sm text-muted-text">{portal.description}</p>
                   {config.isDemoMode && (
                     <p className="mt-2 text-xs text-muted-text">{portal.demoHint}</p>
+                  )}
+                  {config.isDevelopment && !config.isDemoMode && (
+                    <p className="mt-2 text-xs text-muted-text">Dev: {portal.devHint}</p>
                   )}
                   <div className="mt-4 flex flex-wrap gap-2">
                     <Link

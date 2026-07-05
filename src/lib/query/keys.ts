@@ -67,9 +67,18 @@ export const queryKeys = {
       [...queryKeys.buyer.all, 'transaction', id] as const,
     insights: () => [...queryKeys.buyer.all, 'insights'] as const,
   },
+  ratings: {
+    all: ['ratings'] as const,
+    userSummary: (userId: string) => [...queryKeys.ratings.all, 'user', userId] as const,
+    farmerSummary: (farmerId: string) => [...queryKeys.ratings.all, 'farmer', farmerId] as const,
+    buyerSummary: (buyerId: string) => [...queryKeys.ratings.all, 'buyer', buyerId] as const,
+    transaction: (transactionId: string) =>
+      [...queryKeys.ratings.all, 'transaction', transactionId] as const,
+  },
   admin: {
     all: ['admin'] as const,
     dashboard: () => [...queryKeys.admin.all, 'dashboard'] as const,
+    analytics: () => [...queryKeys.admin.all, 'analytics'] as const,
     users: (filters?: object) =>
       [...queryKeys.admin.all, 'users', filters ?? {}] as const,
     user: (id: string) => [...queryKeys.admin.all, 'user', id] as const,

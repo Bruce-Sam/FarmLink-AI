@@ -23,6 +23,11 @@ export const getDashboard = asyncHandler(async (_req: Request, res: Response) =>
   successResponse(res, { message: 'Dashboard metrics retrieved', data: overview });
 });
 
+export const getAnalytics = asyncHandler(async (_req: Request, res: Response) => {
+  const analytics = await dashboardService.adminAnalytics();
+  successResponse(res, { message: 'Platform analytics retrieved', data: analytics });
+});
+
 export const listUsers = asyncHandler(async (req: Request, res: Response) => {
   const query = adminUsersQuerySchema.parse(req.query);
   const { items, total } = await adminService.listUsers(query);

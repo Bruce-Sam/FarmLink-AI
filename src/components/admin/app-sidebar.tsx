@@ -22,6 +22,7 @@ import {
   Users,
   Warehouse,
 } from 'lucide-react';
+import { AfuoPortalMark } from '@/components/brand/AfuoPortalMark';
 import { cn } from '@/lib/utils';
 import { ADMIN_ROUTES } from '@/constants/routes';
 import { Button } from '@/components/ui/button';
@@ -168,19 +169,12 @@ export function AppSidebar({ mobileOpen, onMobileOpenChange }: AppSidebarProps) 
     <>
       <div className={cn('p-4', collapsed && !isMobile && 'px-2')}>
         <Link href={ADMIN_ROUTES.home} className="flex items-center gap-3">
-          <span className="flex size-10 items-center justify-center rounded-lg bg-[var(--admin-nav-active)] font-heading text-lg font-bold text-white">
-            FL
-          </span>
-          {(!collapsed || isMobile) && (
-            <div className="min-w-0">
-              <p className="font-heading truncate text-sm font-bold text-[var(--admin-nav-fg)]">
-                FarmLink Admin
-              </p>
-              <p className="truncate text-xs text-[var(--admin-nav-muted)]">
-                Harvest Intelligence
-              </p>
-            </div>
-          )}
+          <AfuoPortalMark
+            variant="admin"
+            compact={collapsed && !isMobile}
+            useFullLogo={!collapsed || isMobile}
+            subtitle={collapsed && !isMobile ? undefined : 'Command centre'}
+          />
         </Link>
       </div>
       <StatusRail />

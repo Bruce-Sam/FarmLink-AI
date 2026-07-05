@@ -302,7 +302,7 @@ export function SupplyInsightsPageContent() {
 
           title="Supply insights"
 
-          subtitle="Procurement analytics from your FarmLink activity"
+          subtitle="Procurement analytics from your Afuo Market activity"
 
         />
 
@@ -335,7 +335,7 @@ export function SupplyInsightsPageContent() {
 
         title="Supply insights"
 
-        subtitle="Procurement analytics from your FarmLink activity"
+        subtitle="Procurement analytics from your Afuo Market activity"
 
       />
 

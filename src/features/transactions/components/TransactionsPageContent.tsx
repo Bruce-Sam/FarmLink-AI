@@ -44,7 +44,7 @@ export function TransactionsPageContent() {
     <div className="mx-auto max-w-3xl px-4 py-5">
       <PageHeader title="Transactions" subtitle="Confirmed sales and deliveries" />
       <p className="mt-3 rounded-xl bg-morning-mist px-4 py-3 text-sm text-muted-text">
-        Payment settlement is handled outside FarmLink in the current MVP.
+        Payment settlement is handled outside Afuo Market in the current MVP.
       </p>
 
       <Tabs value={filter} onValueChange={setFilter} className="mt-6">

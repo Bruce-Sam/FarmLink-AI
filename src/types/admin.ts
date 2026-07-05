@@ -112,6 +112,70 @@ export interface AdminDashboardOverview {
   recentActivities: AdminAuditLog[];
 }
 
+export interface AdminAnalyticsTrendPoint {
+  date: string;
+  newUsers: number;
+  newListings: number;
+  newOffers: number;
+  completedTransactions: number;
+  transactionValue: number;
+}
+
+export interface AdminAnalytics {
+  generatedAt: string;
+  periodDays: number;
+  trends: AdminAnalyticsTrendPoint[];
+  funnel: {
+    publishedListings: number;
+    totalMatches: number;
+    offersSent: number;
+    offersAccepted: number;
+    completedTransactions: number;
+    activeDemands: number;
+    conversionRates: {
+      listingToMatch: number;
+      matchToOffer: number;
+      offerToAccept: number;
+      acceptToComplete: number;
+    };
+    offersFromMatchedListings: number;
+  };
+  offersByStatus: Array<{ status: string; count: number }>;
+  transactionsByStatus: Array<{ status: string; count: number }>;
+  listingsByStatus: Array<{ status: string; count: number }>;
+  matchesByStatus: Array<{ status: string; count: number }>;
+  usersByRole: Array<{ role: string; count: number }>;
+  buyersByType: Array<{ buyerType: string; count: number }>;
+  newUsersLast7Days: number;
+  newUsersLast30Days: number;
+  averageMatchScore: number;
+  matchScoreDistribution: Array<{ bucket: string; count: number }>;
+  ratingsSummary: {
+    totalRatings: number;
+    averageScore: number;
+    farmerAverageScore: number;
+    buyerAverageScore: number;
+  };
+  weeklyComparison: {
+    listingsThisWeek: number;
+    listingsLastWeek: number;
+    offersThisWeek: number;
+    offersLastWeek: number;
+    transactionsThisWeek: number;
+    transactionsLastWeek: number;
+    gmvThisWeek: number;
+    gmvLastWeek: number;
+  };
+  listingsByCategory: Array<{ categoryId: string; category: string; count: number }>;
+  listingsByRegion: Array<{ region: string; count: number }>;
+  totals: {
+    listings: number;
+    matches: number;
+    offers: number;
+    transactions: number;
+  };
+}
+
 export interface AdminListing {
   id: string;
   farmerId: string;

@@ -47,7 +47,7 @@ export function NotificationsPageContent() {
         <EmptyState
           className="mt-8"
           title="No notifications yet"
-          description="FarmLink will notify you when buyers match your listings or send offers."
+          description="Afuo Market will notify you when buyers match your listings or send offers."
         />
       ) : (
         <ul className="mt-6 divide-y divide-morning-mist rounded-2xl border border-morning-mist bg-warm-paper">

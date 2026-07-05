@@ -231,7 +231,11 @@ export function mapBackendListing(raw: Record<string, unknown>): Listing {
     pricePerUnit: Number(raw.pricePerUnit ?? 0),
     currency: String(raw.currency ?? 'GHS'),
     description: raw.description ? String(raw.description) : undefined,
-    images: [],
+    images: Array.isArray(raw.imageUrls)
+      ? (raw.imageUrls as string[])
+      : Array.isArray(raw.images)
+        ? (raw.images as string[])
+        : [],
     harvestDate: toOptionalIso(raw.harvestDate as string | Date | undefined),
     availableFrom: toIso(raw.availableFrom as string | Date | undefined),
     availableUntil: toOptionalIso(raw.availableUntil as string | Date | undefined),
@@ -257,9 +261,14 @@ export function mapBackendListingToMarketplace(raw: Record<string, unknown>): Ma
     | { farmName?: string; verificationStatus?: string }
     | undefined;
 
+  const farmerName =
+    (raw.farmerName as string | undefined) ??
+    farmer?.farmName ??
+    listing.farmerId;
+
   return {
     ...listing,
-    farmerName: String((raw.farmerName as string | undefined) ?? listing.farmerId),
+    farmerName: String(farmerName),
     farmName: farmer?.farmName,
     farmerVerified: farmer?.verificationStatus === 'VERIFIED',
     availableQuantity:
@@ -295,6 +304,7 @@ export function toBackendListingCreatePayload(
     town: profile.village ?? profile.district,
     latitude: coords.latitude,
     longitude: coords.longitude,
+    imageUrls: payload.images ?? [],
   };
 }
 
@@ -313,6 +323,7 @@ export function toBackendListingUpdatePayload(
   if (payload.availableUntil) body.availableUntil = payload.availableUntil;
   if (payload.region) body.region = payload.region;
   if (payload.district) body.district = payload.district;
+  if (payload.images) body.imageUrls = payload.images;
   return body;
 }
 

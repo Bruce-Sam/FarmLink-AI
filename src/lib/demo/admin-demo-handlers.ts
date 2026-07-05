@@ -3,6 +3,7 @@ import type { AuthSession } from '@/types/auth';
 import type { PaginationMeta } from '@/types/api';
 import {
   ADMIN_DEMO_CREDENTIALS,
+  adminDemoAnalytics,
   adminDemoAuditLogs,
   adminDemoBuyers,
   adminDemoDashboard,
@@ -74,6 +75,11 @@ export async function handleAdminDemoRequest<T>(
   if (basePath === '/admin/dashboard' && method === 'GET') {
     await delay();
     return ok(adminDemoDashboard as T);
+  }
+
+  if (basePath === '/admin/analytics' && method === 'GET') {
+    await delay();
+    return ok(adminDemoAnalytics as T);
   }
 
   if (basePath === '/admin/users' && method === 'GET') {

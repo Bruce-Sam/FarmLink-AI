@@ -27,7 +27,7 @@ interface PWAContextValue {
 
 const PWAContext = createContext<PWAContextValue | null>(null);
 
-const INSTALL_DISMISSED_KEY = 'farmlink-pwa-install-dismissed';
+const INSTALL_DISMISSED_KEY = 'Afuo Market-pwa-install-dismissed';
 
 interface PWAProviderProps {
   children: ReactNode;

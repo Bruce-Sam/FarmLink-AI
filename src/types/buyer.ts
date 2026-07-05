@@ -166,6 +166,7 @@ export interface MarketplaceListing {
   pricePerUnit: number;
   currency: string;
   description?: string;
+  images: string[];
   harvestDate?: string;
   availableFrom: string;
   availableUntil?: string;

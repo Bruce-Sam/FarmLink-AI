@@ -9,8 +9,7 @@ export async function getTransportSuggestions(): Promise<TransportSuggestion[]> 
   return (response.data.suggestions ?? []).map(mapBackendTransportSuggestion);
 }
 
-export async function getTransactionTransportSuggestions(
-  _transactionId: string,
-): Promise<TransportSuggestion[]> {
+export async function getTransactionTransportSuggestions(transactionId?: string): Promise<TransportSuggestion[]> {
+  void transactionId;
   return getTransportSuggestions();
 }

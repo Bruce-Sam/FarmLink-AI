@@ -1,4 +1,5 @@
 import type {
+  AdminAnalytics,
   AdminAuditLog,
   AdminDashboardOverview,
   AdminDemand,
@@ -12,7 +13,7 @@ import type {
 
 export const adminDemoUser: AdminUser = {
   id: 'admin-demo-id',
-  fullName: 'FarmLink Administrator',
+  fullName: 'Afuo Market Administrator',
   phoneNumber: '+233200000000',
   email: 'admin@farmlink.local',
   role: 'ADMIN',
@@ -77,6 +78,127 @@ export const adminDemoDashboard: AdminDashboardOverview = {
       createdAt: new Date(Date.now() - 5 * 3600000).toISOString(),
     },
   ] as AdminAuditLog[],
+};
+
+function buildDemoTrends(): AdminAnalytics['trends'] {
+  const trends: AdminAnalytics['trends'] = [];
+  for (let i = 29; i >= 0; i -= 1) {
+    const d = new Date();
+    d.setDate(d.getDate() - i);
+    const day = d.getDay();
+    const weekend = day === 0 || day === 6;
+    trends.push({
+      date: d.toISOString().slice(0, 10),
+      newUsers: weekend ? 1 : 2 + (i % 4),
+      newListings: weekend ? 2 : 4 + (i % 5),
+      newOffers: weekend ? 1 : 3 + (i % 3),
+      completedTransactions: i % 5 === 0 ? 2 : i % 3 === 0 ? 1 : 0,
+      transactionValue: (i % 4 === 0 ? 18500 : i % 3 === 0 ? 9200 : 0) + (weekend ? 0 : 1500),
+    });
+  }
+  return trends;
+}
+
+export const adminDemoAnalytics: AdminAnalytics = {
+  generatedAt: new Date().toISOString(),
+  periodDays: 30,
+  trends: buildDemoTrends(),
+  funnel: {
+    publishedListings: 73,
+    totalMatches: 214,
+    offersSent: 89,
+    offersAccepted: 28,
+    completedTransactions: 19,
+    activeDemands: 34,
+    conversionRates: {
+      listingToMatch: 293.2,
+      matchToOffer: 41.6,
+      offerToAccept: 31.5,
+      acceptToComplete: 67.9,
+    },
+    offersFromMatchedListings: 62,
+  },
+  offersByStatus: [
+    { status: 'PENDING', count: 12 },
+    { status: 'ACCEPTED', count: 28 },
+    { status: 'REJECTED', count: 31 },
+    { status: 'CANCELLED', count: 9 },
+    { status: 'EXPIRED', count: 6 },
+    { status: 'COMPLETED', count: 3 },
+  ],
+  transactionsByStatus: [
+    { status: 'CONFIRMED', count: 8 },
+    { status: 'AWAITING_PICKUP', count: 6 },
+    { status: 'IN_TRANSIT', count: 4 },
+    { status: 'DELIVERED', count: 5 },
+    { status: 'COMPLETED', count: 19 },
+    { status: 'CANCELLED', count: 2 },
+    { status: 'DISPUTED', count: 1 },
+  ],
+  listingsByStatus: [
+    { status: 'DRAFT', count: 11 },
+    { status: 'PUBLISHED', count: 58 },
+    { status: 'PARTIALLY_RESERVED', count: 15 },
+    { status: 'RESERVED', count: 9 },
+    { status: 'SOLD', count: 22 },
+    { status: 'EXPIRED', count: 7 },
+    { status: 'CANCELLED', count: 4 },
+  ],
+  matchesByStatus: [
+    { status: 'RECOMMENDED', count: 98 },
+    { status: 'VIEWED', count: 54 },
+    { status: 'DISMISSED', count: 12 },
+    { status: 'OFFERED', count: 31 },
+    { status: 'CONVERTED', count: 41 },
+    { status: 'EXPIRED', count: 8 },
+  ],
+  usersByRole: [
+    { role: 'FARMER', count: 86 },
+    { role: 'BUYER', count: 62 },
+    { role: 'ADMIN', count: 1 },
+  ],
+  buyersByType: [
+    { buyerType: 'RESTAURANT', count: 18 },
+    { buyerType: 'HOTEL', count: 9 },
+    { buyerType: 'MARKET_TRADER', count: 14 },
+    { buyerType: 'WHOLESALER', count: 11 },
+    { buyerType: 'SUPERMARKET', count: 5 },
+    { buyerType: 'SCHOOL', count: 3 },
+    { buyerType: 'OTHER', count: 2 },
+  ],
+  newUsersLast7Days: 14,
+  newUsersLast30Days: 48,
+  averageMatchScore: 78.4,
+  matchScoreDistribution: [
+    { bucket: '0–39', count: 8 },
+    { bucket: '40–59', count: 22 },
+    { bucket: '60–79', count: 89 },
+    { bucket: '80–100', count: 95 },
+  ],
+  ratingsSummary: {
+    totalRatings: 47,
+    averageScore: 4.4,
+    farmerAverageScore: 4.6,
+    buyerAverageScore: 4.2,
+  },
+  weeklyComparison: {
+    listingsThisWeek: 18,
+    listingsLastWeek: 14,
+    offersThisWeek: 11,
+    offersLastWeek: 9,
+    transactionsThisWeek: 5,
+    transactionsLastWeek: 3,
+    gmvThisWeek: 42800,
+    gmvLastWeek: 31200,
+  },
+  listingsByCategory: adminDemoDashboard.listingsByCategory,
+  listingsByRegion: adminDemoDashboard.listingsByRegion,
+  totals: {
+    listings: 126,
+    matches: 214,
+    offers: 89,
+    transactions: 45,
+  },
 };
 
 export const adminDemoFarmers: AdminUser[] = [

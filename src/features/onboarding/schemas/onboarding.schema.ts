@@ -93,4 +93,4 @@ export interface OnboardingProgress {
   updatedAt: string;
 }
 
-export const ONBOARDING_PROGRESS_KEY = 'farmlink-onboarding-progress';
+export const ONBOARDING_PROGRESS_KEY = 'Afuo Market-onboarding-progress';

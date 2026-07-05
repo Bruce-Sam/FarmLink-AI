@@ -18,6 +18,8 @@ import {
   getPortalRoleSignupPath,
 } from '@/features/auth/utils/role-validation';
 import { config } from '@/lib/config';
+import { seedCredentialHint } from '@/constants/seed-credentials';
+import { ApiHealthBanner } from '@/components/feedback/ApiHealthBanner';
 import { cn } from '@/lib/utils';
 import Link from 'next/link';
 
@@ -75,6 +77,8 @@ export function BuyerLoginForm({ onSuccess, className }: BuyerLoginFormProps) {
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className={cn('space-y-5', className)} noValidate>
+      {!config.isDemoMode && <ApiHealthBanner className="mb-1" />}
+
       {!isOnline && (
         <div
           role="status"
@@ -157,7 +161,9 @@ export function BuyerLoginForm({ onSuccess, className }: BuyerLoginFormProps) {
       <p className="text-center text-xs text-ledger-grey">
         {config.isDemoMode
           ? 'Demo buyer: orders@goldenspoon.gh · any password (6+ characters)'
-          : 'Use your registered buyer email and password.'}
+          : config.isDevelopment
+            ? `Dev account: ${seedCredentialHint('buyer')}`
+            : 'Use your registered buyer email and password.'}
       </p>
     </form>
   );

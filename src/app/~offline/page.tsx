@@ -3,7 +3,7 @@ export default function OfflinePage() {
     <main className="field-rows flex min-h-dvh flex-col items-center justify-center px-6 text-center">
       <div className="max-w-md space-y-4">
         <p className="text-sm font-semibold uppercase tracking-wide text-farm-green">
-          FarmLink Farmer
+          Afuo Market
         </p>
         <h1 className="font-heading text-2xl font-bold text-field-ink">
           You are offline

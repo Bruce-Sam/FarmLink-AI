@@ -60,7 +60,7 @@ export default function FarmerLoginPage() {
             </div>
             <FarmerLoginForm onSuccess={() => router.replace('/farmer')} />
             <p className="text-center text-sm text-muted-text">
-              New to FarmLink?{' '}
+              New to Afuo Market?{' '}
               <Link href={FARMER_ROUTES.signup} className="font-medium text-farm-green hover:underline">
                 Create a farmer account
               </Link>

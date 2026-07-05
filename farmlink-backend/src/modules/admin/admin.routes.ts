@@ -5,6 +5,7 @@ import { authorize } from '../../middlewares/role.middleware';
 import { validate } from '../../middlewares/validate.middleware';
 import { uuidParam } from '../../utils/common-schemas';
 import {
+  getAnalytics,
   getDashboard,
   getListing,
   getUser,
@@ -26,6 +27,7 @@ const router = Router();
 router.use(authenticate, authorize(Role.ADMIN));
 
 router.get('/dashboard', getDashboard);
+router.get('/analytics', getAnalytics);
 
 router.get('/users', listUsers);
 router.get('/users/:userId', validate({ params: uuidParam('userId') }), getUser);

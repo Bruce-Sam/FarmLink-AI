@@ -28,6 +28,7 @@ export * as marketplaceApi from './marketplace.api';
 export * as buyerOffersApi from './buyer-offers.api';
 export * as buyerTransactionsApi from './buyer-transactions.api';
 export * as farmAdvisoryApi from './farm-advisory.api';
+export * as ratingsApi from './ratings.api';
 export * as adminApi from './admin.api';
 export * as adminAuthApi from './admin-auth.api';
 export * as healthApi from './health.api';

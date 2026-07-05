@@ -7,7 +7,8 @@ import {
 import { useNetworkStatus } from '@/hooks/use-network-status';
 import { adminAuthApi } from '@/lib/api';
 import { config } from '@/lib/config';
-import { ADMIN_DEMO_CREDENTIALS } from '@/mocks/admin-data';
+import { seedCredentialHint } from '@/constants/seed-credentials';
+import { ApiHealthBanner } from '@/components/feedback/ApiHealthBanner';
 import { cn } from '@/lib/utils';
 import { Button } from '@/components/ui/button';
 import { Checkbox } from '@/components/ui/checkbox';
@@ -17,9 +18,8 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { Eye, EyeOff, WifiOff } from 'lucide-react';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
-import { useQuery, useQueryClient } from '@tanstack/react-query';
+import { useQueryClient } from '@tanstack/react-query';
 import { queryKeys } from '@/lib/query/keys';
-import { healthApi } from '@/lib/api';
 
 interface AdminLoginFormProps {
   onSuccess?: () => void;
@@ -31,13 +31,6 @@ export function AdminLoginForm({ onSuccess, className }: AdminLoginFormProps) {
   const queryClient = useQueryClient();
   const [showPassword, setShowPassword] = useState(false);
   const [submitError, setSubmitError] = useState<string | null>(null);
-
-  const healthQuery = useQuery({
-    queryKey: queryKeys.admin.health(),
-    queryFn: () => healthApi.getApiHealth().catch(() => null),
-    retry: false,
-    staleTime: 30_000,
-  });
 
   const {
     register,
@@ -51,7 +44,6 @@ export function AdminLoginForm({ onSuccess, className }: AdminLoginFormProps) {
   });
 
   const remember = watch('remember');
-  const apiOnline = healthQuery.data?.success ?? false;
 
   const onSubmit = async (values: LoginFormValues) => {
     if (!isOnline) {
@@ -77,28 +69,16 @@ export function AdminLoginForm({ onSuccess, className }: AdminLoginFormProps) {
   };
 
   const showDemoCreds = config.useMockData || config.isDemoMode;
+  const showDevCreds = config.isDevelopment && !config.isDemoMode;
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className={cn('space-y-5', className)} noValidate>
-      <div
-        role="status"
-        className={cn(
-          'flex items-center gap-2 rounded-lg border px-4 py-2.5 text-sm',
-          apiOnline
-            ? 'border-leaf-green/30 bg-leaf-green/10 text-farm-green'
-            : 'border-clay-orange/30 bg-clay-orange/10 text-clay-orange',
-        )}
-      >
-        <span
-          className={cn('size-2 rounded-full', apiOnline ? 'bg-leaf-green' : 'bg-clay-orange')}
-          aria-hidden
+      {!config.isDemoMode && (
+        <ApiHealthBanner
+          className="border-[var(--admin-border)]"
+          offlineMessage="API unreachable — start the backend on port 4000"
         />
-        {healthQuery.isLoading
-          ? 'Checking platform health…'
-          : apiOnline
-            ? 'API online — ready for administrator sign-in'
-            : 'API unreachable — demo credentials may still work'}
-      </div>
+      )}
 
       {!isOnline && (
         <div
@@ -179,7 +159,12 @@ export function AdminLoginForm({ onSuccess, className }: AdminLoginFormProps) {
 
       {showDemoCreds && (
         <p className="rounded-lg border border-dashed border-[var(--admin-border)] bg-[var(--admin-bg)] px-4 py-3 text-center text-xs text-muted-foreground">
-          Demo admin: {ADMIN_DEMO_CREDENTIALS.email} · {ADMIN_DEMO_CREDENTIALS.password}
+          Demo admin: admin@farmlink.local · AdminPassword123!
+        </p>
+      )}
+      {showDevCreds && !showDemoCreds && (
+        <p className="rounded-lg border border-dashed border-[var(--admin-border)] bg-[var(--admin-bg)] px-4 py-3 text-center text-xs text-muted-foreground">
+          Dev account: {seedCredentialHint('admin')}
         </p>
       )}
     </form>

@@ -103,7 +103,9 @@ export const demoListings: Listing[] = [
     currency: 'GHS',
     description:
       'Vine-ripened Roma tomatoes harvested this week. Ideal for market traders and processing. Stored in ventilated crates.',
-    images: [],
+    images: [
+      'https://images.unsplash.com/photo-1546470424-e05710ece327?auto=format&fit=crop&w=600&q=80',
+    ],
     harvestDate: twoDaysAgo,
     availableFrom: twoDaysAgo,
     availableUntil: nextWeek,
@@ -126,7 +128,9 @@ export const demoListings: Listing[] = [
     pricePerUnit: 8,
     currency: 'GHS',
     description: 'Medium-sized Apem plantain bunches, ready for ripening.',
-    images: [],
+    images: [
+      'https://images.unsplash.com/photo-1606111194898-2f4df7b2d7d7?auto=format&fit=crop&w=600&q=80',
+    ],
     availableFrom: weekAgo,
     availableUntil: nextWeek,
     region: 'Ashanti',

@@ -18,7 +18,7 @@ export default function FarmerSignupPage() {
           <FarmerPortalMark />
           <div className="my-10 space-y-5">
             <h1 className="font-heading max-w-lg text-3xl font-bold leading-tight text-field-ink sm:text-4xl">
-              Start listing your produce on FarmLink.
+              Start listing your produce on Afuo Market.
             </h1>
             <p className="max-w-lg text-lg text-muted-text">
               Create a free farmer account, complete your farm profile and connect with buyers
@@ -39,7 +39,7 @@ export default function FarmerSignupPage() {
                 Create your farmer account
               </h2>
             <p className="mt-2 text-muted-text">
-              One FarmLink account can include both farmer and buyer access — list your harvest and
+              One Afuo Market account can include both farmer and buyer access — list your harvest and
               still buy from other farmers. You will set up your farm details after signing up.
             </p>
             </div>

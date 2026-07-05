@@ -22,7 +22,7 @@ export function AboutYouStep({ form }: AboutYouStepProps) {
           About you
         </h2>
         <p className="mt-1 text-sm text-muted-text">
-          Confirm your contact details so buyers and FarmLink can reach you.
+          Confirm your contact details so buyers and Afuo Market can reach you.
         </p>
       </div>
 

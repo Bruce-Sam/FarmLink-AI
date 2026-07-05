@@ -3,6 +3,20 @@ import { ListingSourceType, ProduceUnit } from '@prisma/client';
 import { latitudeSchema, longitudeSchema } from '../../utils/common-schemas';
 import { DEFAULT_LIMIT, DEFAULT_PAGE, MAX_LIMIT } from '../../constants/pagination';
 
+const listingImageSchema = z
+  .string()
+  .max(600_000, 'Image payload too large')
+  .refine(
+    (value) =>
+      value.startsWith('data:image/jpeg') ||
+      value.startsWith('data:image/png') ||
+      value.startsWith('data:image/webp') ||
+      /^https?:\/\//.test(value),
+    'Each image must be a JPEG, PNG, WebP data URL, or HTTP(S) link',
+  );
+
+export const imageUrlsSchema = z.array(listingImageSchema).max(5).optional();
+
 export const extractSchema = z.object({
   text: z.string().trim().min(3).max(2000),
   referenceDate: z
@@ -34,6 +48,7 @@ export const createListingSchema = z
     sourceType: z.nativeEnum(ListingSourceType).default(ListingSourceType.FORM),
     rawInputText: z.string().trim().max(2000).optional(),
     aiExtractionConfidence: z.coerce.number().min(0).max(1).optional(),
+    imageUrls: imageUrlsSchema,
   })
   .refine((d) => d.minimumOrderQuantity <= d.quantity, {
     message: 'minimumOrderQuantity cannot exceed quantity',
@@ -63,6 +78,7 @@ export const updateListingSchema = z.object({
   town: z.string().trim().min(1).max(100).optional(),
   latitude: latitudeSchema.optional(),
   longitude: longitudeSchema.optional(),
+  imageUrls: imageUrlsSchema,
 });
 
 const sortEnum = z

@@ -8,6 +8,7 @@ import { marketplaceRoutes } from '../modules/listings/marketplace.routes';
 import { offersRoutes } from '../modules/offers/offers.routes';
 import { notificationsRoutes } from '../modules/notifications/notifications.routes';
 import { adminRoutes } from '../modules/admin/admin.routes';
+import { ratingsRoutes } from '../modules/ratings/ratings.routes';
 import { healthCheck } from './health.controller';
 
 export const apiRouter = Router();
@@ -21,4 +22,5 @@ apiRouter.use('/listings', listingsRoutes);
 apiRouter.use('/marketplace', marketplaceRoutes);
 apiRouter.use('/offers', offersRoutes);
 apiRouter.use('/notifications', notificationsRoutes);
+apiRouter.use('/ratings', ratingsRoutes);
 apiRouter.use('/admin', adminRoutes);

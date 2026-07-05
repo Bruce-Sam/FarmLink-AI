@@ -16,7 +16,7 @@ export function ListingSuccessScreen() {
       <PageHeader
         className="mt-6"
         title="Your produce is now listed"
-        subtitle="FarmLink is checking for suitable buyers."
+        subtitle="Afuo Market is checking for suitable buyers."
       />
       <div className="mt-8 flex w-full flex-col gap-3">
         {listingId && (

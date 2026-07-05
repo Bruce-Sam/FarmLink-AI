@@ -166,7 +166,7 @@ export function BuyerTransactionsPageContent() {
 
       <p className="mt-4 rounded-xl border border-soft-border bg-produce-cream/60 px-4 py-3 text-sm text-ledger-grey dark:bg-deep-grove/30">
 
-        Payment settlement is handled outside FarmLink in the current MVP. FarmLink tracks
+        Payment settlement is handled outside Afuo Market in the current MVP. Afuo Market tracks
 
         agreed terms and pickup status only.
 

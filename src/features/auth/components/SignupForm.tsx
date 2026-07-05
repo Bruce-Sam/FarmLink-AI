@@ -277,7 +277,7 @@ export function SignupForm({ role, onSuccess, className }: SignupFormProps) {
           }
         />
         <Label htmlFor="agreeTerms" className="cursor-pointer font-normal leading-snug">
-          I agree to use FarmLink for lawful agricultural trade and understand that produce
+          I agree to use Afuo Market for lawful agricultural trade and understand that produce
           quality must be confirmed before purchase.
         </Label>
       </div>

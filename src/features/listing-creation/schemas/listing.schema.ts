@@ -41,6 +41,7 @@ export const listingSchema = z.object({
   latitude: z.coerce.number().min(-90).max(90).optional(),
   longitude: z.coerce.number().min(-180).max(180).optional(),
   sourceType: z.enum(['manual', 'voice', 'text', 'extraction']),
+  images: z.array(z.string()).max(5).optional(),
 });
 
 export type ListingFormValues = z.infer<typeof listingSchema>;

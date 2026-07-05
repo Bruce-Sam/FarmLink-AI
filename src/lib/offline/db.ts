@@ -17,12 +17,12 @@ export interface SyncQueueItem {
   lastError?: string;
 }
 
-class FarmLinkOfflineDB extends Dexie {
+class AfuoMarketOfflineDB extends Dexie {
   listingDrafts!: EntityTable<StoredListingDraft, 'localId'>;
   syncQueue!: EntityTable<SyncQueueItem, 'id'>;
 
   constructor() {
-    super('farmlink-offline');
+    super('afuo-market-offline');
     this.version(1).stores({
       listingDrafts: 'localId, synced, lastModified',
       syncQueue: '++id, localId, createdAt',
@@ -30,4 +30,4 @@ class FarmLinkOfflineDB extends Dexie {
   }
 }
 
-export const offlineDb = new FarmLinkOfflineDB();
+export const offlineDb = new AfuoMarketOfflineDB();

@@ -56,7 +56,7 @@ export function VoiceListingInput() {
       <div className="mx-auto max-w-2xl px-4 py-5 pb-32">
         <PageHeader
           title="Speak your produce"
-          subtitle="Describe your harvest. FarmLink will suggest listing details for you to check."
+          subtitle="Describe your harvest. Afuo Market will suggest listing details for you to check."
         />
 
         <div className="mt-8 space-y-6">

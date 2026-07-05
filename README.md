@@ -1,6 +1,6 @@
-# FarmLink AI
+# Afuo Market
 
-FarmLink AI connects Ghanaian farmers with restaurants, hotels, schools, market traders, wholesalers and other bulk buyers **before** produce is harvested, expires or goes to waste.
+Afuo Market connects Ghanaian farmers with restaurants, hotels, schools, market traders, wholesalers and other bulk buyers **before** produce is harvested, expires or goes to waste.
 
 This repository contains:
 

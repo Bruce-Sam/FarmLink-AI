@@ -70,7 +70,7 @@ export function PWAUpdatePrompt({ className }: PWAUpdatePromptProps) {
       )}
     >
       <p className="text-sm text-foreground">
-        A new version of FarmLink is ready.
+        A new version of Afuo Market is ready.
       </p>
       <Button
         size="sm"

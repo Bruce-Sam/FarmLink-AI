@@ -1,6 +1,6 @@
-const ACCESS_TOKEN_KEY = 'farmlink_access_token';
-const REFRESH_TOKEN_KEY = 'farmlink_refresh_token';
-const REMEMBER_KEY = 'farmlink_remember';
+const ACCESS_TOKEN_KEY = 'Afuo Market_access_token';
+const REFRESH_TOKEN_KEY = 'Afuo Market_refresh_token';
+const REMEMBER_KEY = 'Afuo Market_remember';
 
 function getStorage(remember: boolean): Storage {
   if (typeof window === 'undefined') {

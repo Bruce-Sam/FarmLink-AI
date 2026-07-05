@@ -39,7 +39,7 @@ export default function BuyerSignupPage() {
                 Create your buyer account
               </h2>
             <p className="mt-2 text-muted-text">
-              One FarmLink account can include both farmer and buyer access — sell plantain and
+              One Afuo Market account can include both farmer and buyer access — sell plantain and
               still source tomatoes. You will add business details after signing up.
             </p>
             </div>

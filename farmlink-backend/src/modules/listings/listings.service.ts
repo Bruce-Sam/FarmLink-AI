@@ -75,6 +75,7 @@ export class ListingsService {
         sourceType: input.sourceType,
         rawInputText: input.rawInputText,
         aiExtractionConfidence: input.aiExtractionConfidence,
+        imageUrls: input.imageUrls ?? [],
         status: ListingStatus.DRAFT,
       },
       include: listingInclude,

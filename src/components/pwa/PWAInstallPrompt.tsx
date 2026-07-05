@@ -27,7 +27,7 @@ export function PWAInstallPrompt({ className }: PWAInstallPromptProps) {
       return;
     }
 
-    const dismissedKey = "farmlink-pwa-install-dismissed";
+    const dismissedKey = "Afuo Market-pwa-install-dismissed";
     if (localStorage.getItem(dismissedKey)) {
       setDismissed(true);
     }
@@ -53,7 +53,7 @@ export function PWAInstallPrompt({ className }: PWAInstallPromptProps) {
 
   const handleDismiss = () => {
     setDismissed(true);
-    localStorage.setItem("farmlink-pwa-install-dismissed", "1");
+    localStorage.setItem("Afuo Market-pwa-install-dismissed", "1");
   };
 
   if (isInstalled || dismissed || !deferredPrompt) return null;
@@ -72,7 +72,7 @@ export function PWAInstallPrompt({ className }: PWAInstallPromptProps) {
       </div>
       <div className="min-w-0 flex-1">
         <p className="font-heading text-sm font-semibold text-foreground">
-          Install FarmLink on your device
+          Install Afuo Market on your device
         </p>
         <p className="mt-0.5 text-xs text-muted-foreground">
           Quick access from your home screen, even with spotty signal.

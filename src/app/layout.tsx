@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from 'next';
 import { Inter, Manrope } from 'next/font/google';
 import { Toaster } from 'sonner';
 import { AppProviders } from '@/providers/AppProviders';
+import { BRAND_NAME, BRAND_TAGLINE } from '@/constants/brand';
 import './globals.css';
 
 const manrope = Manrope({
@@ -18,16 +19,19 @@ const inter = Inter({
 
 export const metadata: Metadata = {
   title: {
-    default: 'FarmLink Farmer',
-    template: '%s · FarmLink Farmer',
+    default: BRAND_NAME,
+    template: `%s · ${BRAND_NAME}`,
   },
-  description:
-    'List produce, find buyers and manage agricultural offers from your field journal.',
-  applicationName: 'FarmLink Farmer',
+  description: `${BRAND_TAGLINE} — connect Ghanaian farmers with buyers.`,
+  applicationName: BRAND_NAME,
   appleWebApp: {
     capable: true,
     statusBarStyle: 'default',
-    title: 'FarmLink',
+    title: BRAND_NAME,
+  },
+  icons: {
+    icon: '/brand/afuo-market-icon.png',
+    apple: '/brand/afuo-market-icon.png',
   },
   formatDetection: {
     telephone: false,
@@ -35,7 +39,7 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: '#356B45',
+  themeColor: '#1B4D2E',
   width: 'device-width',
   initialScale: 1,
   maximumScale: 5,

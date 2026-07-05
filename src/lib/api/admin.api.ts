@@ -10,6 +10,7 @@ function asPaginationMeta(
   return meta as PaginationMeta;
 }
 import type {
+  AdminAnalytics,
   AdminAuditLog,
   AdminDashboardOverview,
   AdminDemand,
@@ -37,6 +38,11 @@ function toQuery(params: object): string {
 
 export async function getDashboard(): Promise<AdminDashboardOverview> {
   const res = await apiGet<AdminDashboardOverview>('/admin/dashboard');
+  return res.data;
+}
+
+export async function getAnalytics(): Promise<AdminAnalytics> {
+  const res = await apiGet<AdminAnalytics>('/admin/analytics');
   return res.data;
 }
 

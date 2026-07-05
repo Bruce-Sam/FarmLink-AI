@@ -7,6 +7,8 @@ import { ADMIN_ROUTES } from '@/constants/routes';
 import { useRouter } from 'next/navigation';
 import { useEffect } from 'react';
 import { Activity, Shield } from 'lucide-react';
+import { AfuoPortalMark } from '@/components/brand/AfuoPortalMark';
+import { BRAND_NAME } from '@/constants/brand';
 
 export default function AdminLoginPage() {
   const router = useRouter();
@@ -32,21 +34,17 @@ export default function AdminLoginPage() {
             <rect width="100%" height="100%" fill="url(#admin-contour)" />
           </svg>
         </div>
-        <div className="relative flex items-center gap-3">
-          <span className="flex size-11 items-center justify-center rounded-xl bg-[var(--admin-nav-bg)] font-heading text-lg font-bold text-[var(--admin-nav-fg)]">
-            FL
-          </span>
-          <div>
-            <p className="font-heading font-bold text-[var(--admin-ink)]">FarmLink Admin</p>
-            <p className="text-xs text-[var(--admin-muted)]">Harvest Intelligence Command Centre</p>
-          </div>
-        </div>
+        <AfuoPortalMark
+          variant="admin"
+          useFullLogo
+          subtitle="Harvest Intelligence Command Centre"
+        />
         <div className="relative my-10 space-y-6">
           <h1 className="font-heading max-w-lg text-3xl font-bold leading-tight sm:text-4xl">
             Oversee Ghana&apos;s agricultural marketplace with precision.
           </h1>
           <p className="max-w-lg text-lg text-[var(--admin-muted)]">
-            Monitor listings, matches, transactions, and platform health from a single command centre built for FarmLink administrators.
+            Monitor listings, matches, transactions, and platform health from a single command centre built for {BRAND_NAME} administrators.
           </p>
           <ul className="flex flex-wrap gap-3 text-sm">
             {[

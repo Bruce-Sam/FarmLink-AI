@@ -11,9 +11,10 @@ import {
   Sprout,
   User,
 } from 'lucide-react';
-import { marketplaceApi, recommendationsApi } from '@/lib/api';
+import { marketplaceApi, ratingsApi, recommendationsApi } from '@/lib/api';
 import { queryKeys } from '@/lib/query/keys';
 import { BUYER_ROUTES } from '@/constants/routes';
+import { ListingPhotoGallery } from '@/components/listings/ListingPhotoGallery';
 import { PageHeader } from '@/components/layout/PageHeader';
 import { LoadingSkeleton } from '@/components/feedback/LoadingSkeleton';
 import { ErrorState } from '@/components/feedback/ErrorState';
@@ -21,6 +22,7 @@ import { PriceDisplay } from '@/components/marketplace/PriceDisplay';
 import { QuantityDisplay } from '@/components/marketplace/QuantityDisplay';
 import { AvailabilityWindow } from '@/components/listings/AvailabilityWindow';
 import { MatchScoreStrip } from '@/components/offers/MatchScoreStrip';
+import { StarRatingDisplay } from '@/components/ratings/StarRatingDisplay';
 import { OfferComposer } from '@/features/offers/components/OfferComposer';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
@@ -66,6 +68,12 @@ export function BuyerListingDetailView({
         limit: 4,
       }),
     enabled: Boolean(listingQuery.data),
+  });
+
+  const farmerRatingsQuery = useQuery({
+    queryKey: queryKeys.ratings.farmerSummary(listingQuery.data?.farmerId ?? ''),
+    queryFn: () => ratingsApi.getFarmerRatingSummary(listingQuery.data!.farmerId),
+    enabled: Boolean(listingQuery.data?.farmerId),
   });
 
   const relatedListings = useMemo(
@@ -127,6 +135,10 @@ export function BuyerListingDetailView({
           </div>
         }
       />
+
+      {listing.images.length > 0 && (
+        <ListingPhotoGallery images={listing.images} title={listing.title} />
+      )}
 
       {matchScore != null && (
         <section className="supply-band border-soft-border bg-produce-cream/60 p-4 dark:bg-deep-grove/30">
@@ -218,6 +230,15 @@ export function BuyerListingDetailView({
               </p>
               {listing.farmName && (
                 <p className="text-sm text-ledger-grey">{listing.farmName}</p>
+              )}
+              {farmerRatingsQuery.data && farmerRatingsQuery.data.totalRatings > 0 && (
+                <div className="flex items-center gap-2 text-sm">
+                  <StarRatingDisplay score={farmerRatingsQuery.data.averageScore} size="sm" />
+                  <span className="text-ledger-grey">
+                    ({farmerRatingsQuery.data.totalRatings} review
+                    {farmerRatingsQuery.data.totalRatings === 1 ? '' : 's'})
+                  </span>
+                </div>
               )}
               <p className="flex items-start gap-2 text-sm text-ledger-grey">
                 <MapPin className="mt-0.5 size-4 shrink-0" aria-hidden />

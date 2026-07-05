@@ -2,9 +2,10 @@
 
 import { useState } from 'react';
 import { useQuery, useQueryClient } from '@tanstack/react-query';
-import { offersApi } from '@/lib/api';
+import { offersApi, ratingsApi } from '@/lib/api';
 import { queryKeys } from '@/lib/query/keys';
 import { PageHeader } from '@/components/layout/PageHeader';
+import { StarRatingDisplay } from '@/components/ratings/StarRatingDisplay';
 import { LoadingSkeleton } from '@/components/feedback/LoadingSkeleton';
 import { ErrorState } from '@/components/feedback/ErrorState';
 import { OfferStatusBadge } from '@/components/offers/OfferStatusBadge';
@@ -35,6 +36,12 @@ export function OfferDetailView({ offerId }: OfferDetailViewProps) {
   const query = useQuery({
     queryKey: queryKeys.offers.detail(offerId),
     queryFn: () => offersApi.getOffer(offerId),
+  });
+
+  const buyerRatingsQuery = useQuery({
+    queryKey: queryKeys.ratings.buyerSummary(query.data?.buyerId ?? ''),
+    queryFn: () => ratingsApi.getBuyerRatingSummary(query.data!.buyerId),
+    enabled: Boolean(query.data?.buyerId),
   });
 
   const handleAccept = async () => {
@@ -95,6 +102,13 @@ export function OfferDetailView({ offerId }: OfferDetailViewProps) {
 
       <section className="mt-6 space-y-4 rounded-2xl border border-morning-mist bg-warm-paper p-5">
         <h2 className="font-heading text-lg font-semibold">Offer terms</h2>
+        {buyerRatingsQuery.data && buyerRatingsQuery.data.totalRatings > 0 && (
+          <div className="flex flex-wrap items-center gap-2 text-sm text-muted-text">
+            <span>Buyer reputation:</span>
+            <StarRatingDisplay score={buyerRatingsQuery.data.averageScore} size="sm" />
+            <span>({buyerRatingsQuery.data.totalRatings} reviews)</span>
+          </div>
+        )}
         <QuantityDisplay amount={offer.quantity} unit={offer.unit} size="lg" />
         <PriceDisplay amount={offer.pricePerUnit} currency="GHS" perUnit={offer.unit} size="lg" />
         <p className="text-lg font-semibold tabular-nums">
@@ -124,7 +138,7 @@ export function OfferDetailView({ offerId }: OfferDetailViewProps) {
             <AlertDialogTitle>Accept this offer?</AlertDialogTitle>
             <AlertDialogDescription>
               Accepting this offer will reserve the agreed quantity and create a confirmed transaction.
-              Payment settlement is handled outside FarmLink in the current MVP.
+              Payment settlement is handled outside Afuo Market in the current MVP.
             </AlertDialogDescription>
           </AlertDialogHeader>
           <AlertDialogFooter>

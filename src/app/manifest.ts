@@ -1,33 +1,34 @@
 import type { MetadataRoute } from 'next';
+import { BRAND_NAME, BRAND_TAGLINE } from '@/constants/brand';
 
 export default function manifest(): MetadataRoute.Manifest {
   return {
-    name: 'FarmLink Farmer',
-    short_name: 'FarmLink',
-    description: 'List produce, find buyers and manage agricultural offers.',
-    start_url: '/farmer',
+    name: BRAND_NAME,
+    short_name: 'Afuo',
+    description: `${BRAND_TAGLINE} — list produce and source harvest across Ghana.`,
+    start_url: '/',
     display: 'standalone',
     orientation: 'portrait-primary',
     background_color: '#F4EEDD',
-    theme_color: '#356B45',
+    theme_color: '#1B4D2E',
     categories: ['business', 'food', 'productivity'],
     icons: [
       {
-        src: '/icons/icon-192.svg',
+        src: '/brand/afuo-market-icon.png',
         sizes: '192x192',
-        type: 'image/svg+xml',
+        type: 'image/png',
         purpose: 'any',
       },
       {
-        src: '/icons/icon-512.svg',
+        src: '/brand/afuo-market-icon.png',
         sizes: '512x512',
-        type: 'image/svg+xml',
+        type: 'image/png',
         purpose: 'any',
       },
       {
-        src: '/icons/icon-maskable.svg',
+        src: '/brand/afuo-market-icon.png',
         sizes: '512x512',
-        type: 'image/svg+xml',
+        type: 'image/png',
         purpose: 'maskable',
       },
     ],

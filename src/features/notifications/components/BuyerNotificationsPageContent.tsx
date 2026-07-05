@@ -120,7 +120,7 @@ export function BuyerNotificationsPageContent() {
             {filtered.length === 0 ? (
               <EmptyState
                 title="No notifications in this category"
-                description="FarmLink will notify you when farmers respond to offers or pickup dates change."
+                description="Afuo Market will notify you when farmers respond to offers or pickup dates change."
               />
             ) : (
               <ul className="divide-y divide-soft-border rounded-2xl border border-soft-border bg-warm-paper dark:bg-deep-grove/20">

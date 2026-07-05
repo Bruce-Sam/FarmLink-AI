@@ -1,6 +1,7 @@
 'use client';
 
 import Link from 'next/link';
+import { ListingPhotoGallery } from '@/components/listings/ListingPhotoGallery';
 import { ListingStatusBadge } from '@/components/listings/ListingStatusBadge';
 import { QuantityDisplay } from '@/components/marketplace/QuantityDisplay';
 import { PriceDisplay } from '@/components/marketplace/PriceDisplay';
@@ -26,6 +27,12 @@ export function ListingCard({ listing, compact, className }: ListingCardProps) {
     >
       <div className="flex items-start justify-between gap-3">
         <div className="flex min-w-0 flex-1 gap-3">
+          <ListingPhotoGallery
+            variant="thumbnail"
+            images={listing.images}
+            title={listing.title}
+            className="size-16 rounded-xl"
+          />
           <ProduceMarker label={listing.produceType} category="vegetable" />
           <div className="min-w-0">
             <h3 className="truncate font-heading font-semibold text-field-ink">

@@ -1,5 +1,5 @@
 import { apiGet, apiPost } from './client';
-import type { Offer, OfferActionPayload } from '@/types/offer';
+import type { Offer } from '@/types/offer';
 import { mapBackendOffer } from './mappers/backend-mappers';
 
 export async function getOffers(): Promise<Offer[]> {
@@ -22,13 +22,15 @@ export async function acceptOffer(id: string): Promise<Offer> {
   return getOffer(id);
 }
 
-export async function rejectOffer(id: string, _payload?: OfferActionPayload): Promise<Offer> {
+export async function rejectOffer(id: string): Promise<Offer> {
   const response = await apiPost<{ offer: Record<string, unknown> }>(
     `/farmers/offers/${id}/reject`,
   );
   return mapBackendOffer(response.data.offer);
 }
 
-export async function counterOffer(_id: string, _payload: OfferActionPayload): Promise<Offer> {
+export async function counterOffer(id?: string, payload?: import('@/types/offer').OfferActionPayload): Promise<Offer> {
+  void id;
+  void payload;
   throw new Error('Counter offers are not supported yet.');
 }

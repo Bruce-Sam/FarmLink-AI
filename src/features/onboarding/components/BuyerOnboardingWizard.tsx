@@ -941,7 +941,7 @@ export function BuyerOnboardingWizard() {
 
             <p className="mt-1 text-sm text-ledger-grey">
 
-              Help FarmLink match you with suitable farmer listings.
+              Help Afuo Market match you with suitable farmer listings.
 
             </p>
 

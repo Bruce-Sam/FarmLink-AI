@@ -14,6 +14,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select';
+import { ListingImageUpload } from '@/components/listings/ListingImageUpload';
 import { listingSchema, type ListingFormValues } from '@/features/listing-creation/schemas/listing.schema';
 import { GHANA_REGION_NAMES } from '@/constants/ghana-regions';
 import { PRODUCE_UNITS } from '@/constants/units';
@@ -50,6 +51,7 @@ export function ManualListingForm({ listingId, mode = 'create' }: ManualListingF
       sourceType: 'manual',
       unit: 'crate',
       region: 'Ashanti',
+      images: [],
     },
   });
 
@@ -69,6 +71,7 @@ export function ManualListingForm({ listingId, mode = 'create' }: ManualListingF
         availableUntil: values.availableUntil,
         region: values.region,
         district: values.district,
+        images: values.images,
       };
 
       const listing =
@@ -134,6 +137,10 @@ export function ManualListingForm({ listingId, mode = 'create' }: ManualListingF
                 <Label htmlFor="description">Description (optional)</Label>
                 <Textarea id="description" className="mt-1.5" {...form.register('description')} />
               </div>
+              <ListingImageUpload
+                value={form.watch('images') ?? []}
+                onChange={(images) => form.setValue('images', images)}
+              />
             </>
           )}
 

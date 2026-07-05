@@ -226,7 +226,7 @@ export function RecommendationDetailView({ recommendationId }: RecommendationDet
         >
           <Info className="size-4 shrink-0 text-market-green" aria-hidden />
           <p>
-            Match scores are guidance only. FarmLink does not guarantee supply quality, delivery,
+            Match scores are guidance only. Afuo Market does not guarantee supply quality, delivery,
             or farmer availability. Always verify listing details and arrange pickup directly with
             the farmer before committing.
           </p>
@@ -262,6 +262,7 @@ export function RecommendationDetailView({ recommendationId }: RecommendationDet
           unit: rec.unit,
           pricePerUnit: rec.pricePerUnit,
           currency: rec.currency,
+          images: [],
           availableFrom: rec.availableFrom,
           availableUntil: rec.availableUntil,
           region: rec.region,

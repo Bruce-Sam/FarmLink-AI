@@ -1,5 +1,6 @@
 'use client';
 
+import { ListingImageUpload } from '@/components/listings/ListingImageUpload';
 import { MissingFieldsPanel } from '@/features/listing-creation/components/MissingFieldsPanel';
 import { PublishConfirmationDialog } from '@/features/listing-creation/components/PublishConfirmationDialog';
 import { PageHeader } from '@/components/layout/PageHeader';
@@ -42,6 +43,7 @@ export function AIExtractionReview() {
   } = useListingDraftContext();
   const [showPublish, setShowPublish] = useState(false);
   const [isSaving, setIsSaving] = useState(false);
+  const [images, setImages] = useState<string[]>([]);
 
   const form = useForm<ExtractionReviewFormValues>({
     resolver: zodResolver(extractionReviewSchema),
@@ -121,6 +123,7 @@ export function AIExtractionReview() {
         availableUntil: values.availableUntil,
         region: values.region,
         district: values.district,
+        images,
       });
 
       setBackendListingId(listing.id);
@@ -149,7 +152,7 @@ export function AIExtractionReview() {
       <div className="mx-auto max-w-2xl px-4 py-5 pb-32">
         <PageHeader
           title="Check your listing"
-          subtitle="FarmLink has suggested these details from your description. Please check them before continuing."
+          subtitle="Afuo Market has suggested these details from your description. Please check them before continuing."
         />
 
         <p className="mt-4 rounded-xl bg-morning-mist px-4 py-3 text-sm text-deep-soil">
@@ -255,6 +258,7 @@ export function AIExtractionReview() {
               <Input id="availableFrom" type="date" className="mt-1.5" {...form.register('availableFrom')} />
             </div>
           </div>
+          <ListingImageUpload value={images} onChange={setImages} />
         </form>
       </div>
 

@@ -121,7 +121,7 @@ export function FarmAdvisoryChat() {
       >
         <AlertTriangle className="mt-0.5 size-4 shrink-0" aria-hidden />
         <p>
-          FarmLink advisor supports your decisions but does not replace your district extension
+          Afuo Market advisor supports your decisions but does not replace your district extension
           officer. Seek in-person help for severe or spreading outbreaks.
         </p>
       </div>

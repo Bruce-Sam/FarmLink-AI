@@ -122,6 +122,15 @@ export const demoBuyerDemands: BuyerDemand[] = [
   },
 ];
 
+const DEMO_TOMATO_IMAGE =
+  'https://images.unsplash.com/photo-1546470424-e05710ece327?auto=format&fit=crop&w=600&q=80';
+const DEMO_PLANTAIN_IMAGE =
+  'https://images.unsplash.com/photo-1606111194898-2f4df7b2d7d7?auto=format&fit=crop&w=600&q=80';
+const DEMO_MAIZE_IMAGE =
+  'https://images.unsplash.com/photo-1622206151226-18ca2c9ab4a1?auto=format&fit=crop&w=600&q=80';
+const DEMO_PEPPER_IMAGE =
+  'https://images.unsplash.com/photo-1563565375-3ee0815a47d9?auto=format&fit=crop&w=600&q=80';
+
 export const demoAgogoListing: MarketplaceListing = {
   id: DEMO_AGOGO_LISTING_ID,
   farmerId: 'farmer-agogo-tomatoes',
@@ -140,6 +149,7 @@ export const demoAgogoListing: MarketplaceListing = {
   currency: 'GHS',
   description:
     'Fresh Roma tomatoes ready next Monday at Agogo. Ideal for restaurants and market traders. Harvested at peak ripeness.',
+  images: [DEMO_TOMATO_IMAGE],
   harvestDate: nextMonday,
   availableFrom: nextMonday,
   availableUntil: new Date(Date.now() + 10 * 24 * 60 * 60 * 1000).toISOString(),
@@ -175,6 +185,7 @@ export const demoMarketplaceListings: MarketplaceListing[] = [
     pricePerUnit: 85,
     currency: 'GHS',
     description: 'Vine-ripened Roma tomatoes harvested this week.',
+    images: [DEMO_TOMATO_IMAGE],
     harvestDate: twoDaysAgo,
     availableFrom: twoDaysAgo,
     availableUntil: nextWeek,
@@ -206,6 +217,7 @@ export const demoMarketplaceListings: MarketplaceListing[] = [
     unit: 'piece',
     pricePerUnit: 8,
     currency: 'GHS',
+    images: [DEMO_PLANTAIN_IMAGE],
     region: 'Ashanti',
     district: 'Ejisu Municipal',
     town: 'Bonwire',
@@ -233,6 +245,7 @@ export const demoMarketplaceListings: MarketplaceListing[] = [
     unit: 'bag',
     pricePerUnit: 320,
     currency: 'GHS',
+    images: [DEMO_MAIZE_IMAGE],
     region: 'Bono East',
     district: 'Techiman Municipal',
     town: 'Techiman',
@@ -259,6 +272,7 @@ export const demoMarketplaceListings: MarketplaceListing[] = [
     unit: 'crate',
     pricePerUnit: 95,
     currency: 'GHS',
+    images: [DEMO_PEPPER_IMAGE],
     region: 'Central',
     district: 'Awutu Senya East',
     town: 'Kasoa',
@@ -447,7 +461,7 @@ export const demoBuyerTransactions: Transaction[] = [
     pricePerUnit: 7.5,
     totalAmount: 1125,
     currency: 'GHS',
-    status: 'payment_confirmed',
+    status: 'completed',
     deliveryDate: tomorrow,
     pickupLocation: 'Bonwire, Ejisu Municipal, Ashanti',
     region: 'Ashanti',
@@ -520,6 +534,7 @@ export function listingToMarketplace(
     pricePerUnit: listing.pricePerUnit,
     currency: listing.currency,
     description: listing.description,
+    images: listing.images ?? [],
     harvestDate: listing.harvestDate,
     availableFrom: listing.availableFrom,
     availableUntil: listing.availableUntil,

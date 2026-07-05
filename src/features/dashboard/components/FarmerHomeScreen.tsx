@@ -179,7 +179,7 @@ export function FarmerHomeScreen() {
           <EmptyState
             className="mt-4"
             title="No produce listed yet"
-            description="Tell FarmLink what you have available and we will help you find suitable buyers."
+            description="Tell Afuo Market what you have available and we will help you find suitable buyers."
             actionLabel="List produce"
             actionHref="/farmer/list-produce"
           />

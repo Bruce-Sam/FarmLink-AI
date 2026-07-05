@@ -1,12 +1,22 @@
 'use client';
 
+import { useQuery } from '@tanstack/react-query';
 import { useAuth } from '@/hooks/use-auth';
 import { PageHeader } from '@/components/layout/PageHeader';
+import { RatingSummaryCard } from '@/components/ratings/RatingSummaryCard';
 import { ProfileEditForm } from '@/features/farmer-profile/components/ProfileEditForm';
+import { ratingsApi } from '@/lib/api';
 import { formatGhanaPhone } from '@/lib/formatting/phone';
+import { queryKeys } from '@/lib/query/keys';
 
 export function FarmerProfileView() {
   const { user, profile } = useAuth();
+
+  const ratingsQuery = useQuery({
+    queryKey: queryKeys.ratings.userSummary(user?.id ?? ''),
+    queryFn: () => ratingsApi.getUserRatingSummary(user!.id),
+    enabled: Boolean(user?.id),
+  });
 
   return (
     <div className="mx-auto max-w-3xl px-4 py-5 pb-8">
@@ -78,6 +88,16 @@ export function FarmerProfileView() {
           Verification submission is not yet available in this version.
         </p>
       </section>
+
+      {ratingsQuery.data && (
+        <div className="mt-6">
+          <RatingSummaryCard
+            summary={ratingsQuery.data}
+            title="Your seller rating"
+            emptyMessage="No buyer ratings yet. Complete a sale to receive your first review."
+          />
+        </div>
+      )}
 
       <div className="mt-8">
         <ProfileEditForm />

@@ -42,7 +42,7 @@ export async function register(payload: RegisterPayload): Promise<AuthSession> {
 export async function addPortalRole(_role: PortalRole): Promise<User> {
   if (!config.isDemoMode) {
     throw new Error(
-      'Each FarmLink account has one role. Create a separate account to access another portal.',
+      'Each Afuo Market account has one role. Create a separate account to access another portal.',
     );
   }
   const response = await apiPost<User>('/auth/add-role', { role: _role });
@@ -56,7 +56,7 @@ export async function addPortalRole(_role: PortalRole): Promise<User> {
 export async function switchPortal(_portalRole: PortalRole): Promise<User> {
   if (!config.isDemoMode) {
     throw new Error(
-      'Each FarmLink account has one role. Sign in with the account for that portal.',
+      'Each Afuo Market account has one role. Sign in with the account for that portal.',
     );
   }
   const response = await apiPost<User>('/auth/switch-portal', { portalRole: _portalRole });
