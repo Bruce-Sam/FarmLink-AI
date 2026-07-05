@@ -36,7 +36,12 @@ const DEFAULT_OPTIONS: Required<Omit<UseGeolocationOptions, 'autoRequest'>> = {
 export function useGeolocation(
   options: UseGeolocationOptions = {},
 ): UseGeolocationResult {
-  const mergedOptions = { ...DEFAULT_OPTIONS, ...options };
+  const {
+    enableHighAccuracy = DEFAULT_OPTIONS.enableHighAccuracy,
+    timeout = DEFAULT_OPTIONS.timeout,
+    maximumAge = DEFAULT_OPTIONS.maximumAge,
+    autoRequest,
+  } = options;
   const isSupported =
     typeof window !== 'undefined' && 'geolocation' in navigator;
 
@@ -105,19 +110,19 @@ export function useGeolocation(
           resolve(null);
         },
         {
-          enableHighAccuracy: mergedOptions.enableHighAccuracy,
-          timeout: mergedOptions.timeout,
-          maximumAge: mergedOptions.maximumAge,
+          enableHighAccuracy,
+          timeout,
+          maximumAge,
         },
       );
     });
-  }, [isSupported, mergedOptions]);
+  }, [enableHighAccuracy, isSupported, maximumAge, timeout]);
 
   useEffect(() => {
-    if (options.autoRequest) {
+    if (autoRequest) {
       void requestLocation();
     }
-  }, [options.autoRequest, requestLocation]);
+  }, [autoRequest, requestLocation]);
 
   const clearLocation = useCallback(() => {
     setCoordinates(null);

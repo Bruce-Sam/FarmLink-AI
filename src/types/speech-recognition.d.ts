@@ -22,7 +22,6 @@ declare global {
     abort: () => void;
   }
 
-  // eslint-disable-next-line no-var
   var SpeechRecognition: {
     prototype: SpeechRecognition;
     new (): SpeechRecognition;
