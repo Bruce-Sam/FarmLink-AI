@@ -127,7 +127,7 @@ describe('Offers service', () => {
       buyer: { id: mockBuyerProfile.id, userId: mockUserBuyer.id },
     });
     txMock.offer.updateMany.mockResolvedValue({ count: 1 });
-    txMock.produceListing.update.mockResolvedValue({});
+    txMock.produceListing.updateMany.mockResolvedValue({ count: 1 });
     txMock.produceTransaction.create.mockResolvedValue({
       id: 'txn-1',
       offerId,
@@ -152,7 +152,7 @@ describe('Offers service', () => {
 
     const result = await offersService.acceptOffer(mockUserFarmer.id, offerId);
     expect(result.transaction.status).toBe(TransactionStatus.CONFIRMED);
-    expect(txMock.produceListing.update).toHaveBeenCalledWith(
+    expect(txMock.produceListing.updateMany).toHaveBeenCalledWith(
       expect.objectContaining({
         data: expect.objectContaining({ reservedQuantity: 20 }),
       }),

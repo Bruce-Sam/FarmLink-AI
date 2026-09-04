@@ -114,9 +114,15 @@ export class OffersService {
     if (offer.status !== OfferStatus.PENDING) {
       throw ApiError.conflict('Only pending offers can be cancelled');
     }
-    const updated = await prisma.offer.update({
-      where: { id: offerId },
+    const result = await prisma.offer.updateMany({
+      where: { id: offerId, status: OfferStatus.PENDING },
       data: { status: OfferStatus.CANCELLED, cancelledAt: new Date() },
+    });
+    if (result.count === 0) {
+      throw ApiError.conflict('This offer is no longer pending and cannot be cancelled');
+    }
+    const updated = await prisma.offer.findUniqueOrThrow({
+      where: { id: offerId },
       include: offerInclude,
     });
     await recordAudit({
@@ -151,9 +157,15 @@ export class OffersService {
     if (offer.status !== OfferStatus.PENDING) {
       throw ApiError.conflict('Only pending offers can be rejected');
     }
-    const updated = await prisma.offer.update({
-      where: { id: offerId },
+    const result = await prisma.offer.updateMany({
+      where: { id: offerId, status: OfferStatus.PENDING },
       data: { status: OfferStatus.REJECTED, rejectedAt: new Date() },
+    });
+    if (result.count === 0) {
+      throw ApiError.conflict('This offer is no longer pending and cannot be rejected');
+    }
+    const updated = await prisma.offer.findUniqueOrThrow({
+      where: { id: offerId },
       include: offerInclude,
     });
     await notificationService.create({
@@ -219,10 +231,13 @@ export class OffersService {
       const fullyReserved = newReserved >= quantity;
       const newStatus = fullyReserved ? ListingStatus.RESERVED : ListingStatus.PARTIALLY_RESERVED;
 
-      await tx.produceListing.update({
-        where: { id: offer.listing.id },
+      const listingUpdateResult = await tx.produceListing.updateMany({
+        where: { id: offer.listing.id, reservedQuantity: reserved },
         data: { reservedQuantity: newReserved, status: newStatus },
       });
+      if (listingUpdateResult.count === 0) {
+         throw ApiError.conflict('The listing inventory was modified concurrently. Please try again.');
+      }
 
       const transaction = await tx.produceTransaction.create({
         data: {
