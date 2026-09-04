@@ -50,7 +50,7 @@ function normalize(error: unknown): NormalizedError {
   return {
     statusCode: 500,
     code: 'INTERNAL_ERROR',
-    message: 'An unexpected error occurred',
+    message: error instanceof Error ? error.message : 'An unexpected error occurred',
   };
 }
 
@@ -69,15 +69,17 @@ export function errorHandler(
     logger.warn({ requestId: req.id, code: normalized.code }, normalized.message);
   }
 
+  // In production, mask internal error messages to prevent leaking stack traces or sensitive details.
+  const isInternalError = normalized.statusCode >= 500;
+  const hideDetails = config.isProduction && isInternalError;
+
   const body: ApiErrorBody = {
     success: false,
-    message: normalized.message,
+    message: hideDetails ? 'An unexpected error occurred' : normalized.message,
     error: {
       code: normalized.code,
-      // Hide internal details in production unless they are operational validation details.
       details:
-        normalized.details ??
-        (config.isProduction && normalized.statusCode >= 500 ? undefined : undefined),
+        hideDetails ? undefined : normalized.details,
     },
     requestId: String(req.id),
   };
