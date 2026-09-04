@@ -231,10 +231,13 @@ export class OffersService {
       const fullyReserved = newReserved >= quantity;
       const newStatus = fullyReserved ? ListingStatus.RESERVED : ListingStatus.PARTIALLY_RESERVED;
 
-      await tx.produceListing.update({
-        where: { id: offer.listing.id },
+      const listingUpdateResult = await tx.produceListing.updateMany({
+        where: { id: offer.listing.id, reservedQuantity: reserved },
         data: { reservedQuantity: newReserved, status: newStatus },
       });
+      if (listingUpdateResult.count === 0) {
+         throw ApiError.conflict('The listing inventory was modified concurrently. Please try again.');
+      }
 
       const transaction = await tx.produceTransaction.create({
         data: {

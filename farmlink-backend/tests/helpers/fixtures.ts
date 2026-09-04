@@ -74,6 +74,7 @@ export function buildMockPrisma() {
       findFirst: vi.fn(),
       create: vi.fn(),
       update: vi.fn(),
+      updateMany: vi.fn(),
       findMany: vi.fn(),
       count: vi.fn(),
     },
