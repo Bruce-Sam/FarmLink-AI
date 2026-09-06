@@ -1,0 +1,4 @@
+## 2024-09-06 - Default Admin Password and Error Leakage in Production
+**Vulnerability:** Default admin password allowed in production, and internal error details leaked in production due to a bug in `error.middleware.ts`.
+**Learning:** Both configuration and error-handling paths must be audited carefully. Simple ternary logic errors (`? undefined : undefined`) can break intended security mitigations (masking 500 errors). Fail-safe defaults in environment variables must be actively blocked in production.
+**Prevention:** Ensure all critical secrets have fail-safe checks in production. Write tests that explicitly verify that error details are omitted in production environments.

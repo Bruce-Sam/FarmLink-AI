@@ -76,8 +76,9 @@ export function errorHandler(
       code: normalized.code,
       // Hide internal details in production unless they are operational validation details.
       details:
-        normalized.details ??
-        (config.isProduction && normalized.statusCode >= 500 ? undefined : undefined),
+        config.isProduction && normalized.statusCode >= 500
+          ? undefined
+          : normalized.details,
     },
     requestId: String(req.id),
   };
