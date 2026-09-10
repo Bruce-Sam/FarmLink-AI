@@ -75,3 +75,9 @@ export const config = buildConfig();
 if (config.isProduction && config.JWT_ACCESS_SECRET.includes('replace-with')) {
   throw new Error('JWT_ACCESS_SECRET must be changed from the example value in production.');
 }
+
+// Security check: Prevent the application from starting in production with the default admin password
+// to avoid unauthorized access.
+if (config.isProduction && config.ADMIN_PASSWORD === 'AdminPassword123!') {
+  throw new Error('ADMIN_PASSWORD must be changed from the default value in production.');
+}
