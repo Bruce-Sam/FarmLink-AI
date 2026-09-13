@@ -1,0 +1,5 @@
+
+## 2024-03-24 - [Protect Production Against Default Admin Passwords]
+**Vulnerability:** The application was allowing the default fallback value for `ADMIN_PASSWORD` (`AdminPassword123!`) to be used in production environments. This could lead to a severe authentication bypass since attackers could log in as an administrator using the known default credentials if the environment variable was not explicitly set during deployment.
+**Learning:** Default fallback values in environment configuration validation schemas (like Zod) are useful for development and testing, but they pose a critical security risk when carried over to production. The configuration validation must explicitly reject these default sensitive values when `NODE_ENV` is set to `production`.
+**Prevention:** Implement checks in the configuration generation process (e.g., `src/config/env.ts`) that throw immediate errors if critical secrets match their known insecure default values in production environments. This ensures the application fails securely on startup rather than running in an insecure state.
