@@ -204,12 +204,15 @@ function scoreLabel(score: number): string {
 }
 
 function resolveCoords(
-  gps?: { lat: number; lng: number },
-): { latitude: number; longitude: number } {
+  gps?: { lat: number; lng: number } | undefined | null,
+): { latitude: number | undefined; longitude: number | undefined } | undefined {
   if (gps && typeof gps.lat === 'number' && typeof gps.lng === 'number') {
     return { latitude: gps.lat, longitude: gps.lng };
   }
-  return { latitude: DEFAULT_COORDS.lat, longitude: DEFAULT_COORDS.lng };
+  if (typeof DEFAULT_COORDS !== 'undefined' && DEFAULT_COORDS !== null) {
+     return { latitude: DEFAULT_COORDS.lat, longitude: DEFAULT_COORDS.lng };
+  }
+  return { latitude: undefined, longitude: undefined };
 }
 
 // ----- Listings -----
@@ -302,8 +305,8 @@ export function toBackendListingCreatePayload(
     region: payload.region || profile.region,
     district: payload.district || profile.district,
     town: profile.village ?? profile.district,
-    latitude: coords.latitude,
-    longitude: coords.longitude,
+    latitude: coords?.latitude,
+    longitude: coords?.longitude,
     imageUrls: payload.images ?? [],
   };
 }
@@ -437,8 +440,10 @@ export function toBackendFarmerProfilePayload(
   if (data.region) body.region = data.region;
   if (data.district) body.district = data.district;
   if (data.village || data.district) body.town = data.village ?? data.district;
-  body.latitude = coords.latitude;
-  body.longitude = coords.longitude;
+  if (coords) {
+    if (coords.latitude !== undefined) body.latitude = coords.latitude;
+    if (coords.longitude !== undefined) body.longitude = coords.longitude;
+  }
   if (data.primaryCrops) body.primaryCrops = data.primaryCrops;
   if (data.farmSizeAcres != null) body.farmSizeAcres = data.farmSizeAcres;
   if (data.bio) body.description = data.bio;
@@ -494,8 +499,10 @@ export function toBackendBuyerProfilePayload(
   if (data.region) body.region = data.region;
   if (data.district) body.district = data.district;
   if (data.town) body.town = data.town;
-  body.latitude = coords.latitude;
-  body.longitude = coords.longitude;
+  if (coords) {
+    if (coords.latitude !== undefined) body.latitude = coords.latitude;
+    if (coords.longitude !== undefined) body.longitude = coords.longitude;
+  }
   if (data.preferredProduce) body.preferredProduce = data.preferredProduce;
   if (data.maxTravelDistanceKm != null) body.maximumTravelDistanceKm = data.maxTravelDistanceKm;
   if (data.typicalQuantityMin != null) body.minimumOrderQuantity = data.typicalQuantityMin;

@@ -151,6 +151,7 @@ export function updateFarmerProfileForCurrentUser(
   const next = {
     ...profile,
     ...update,
+    onboardingComplete: update.onboardingComplete ?? true,
     updatedAt: new Date().toISOString(),
   };
   farmerProfilesByUserId.set(demoCurrentUser.id, next);
@@ -176,7 +177,7 @@ export function updateBuyerProfileForCurrentUser(
 }
 
 export function setDemoCurrentUserFromLogin(credentials: LoginCredentials): User {
-  const identifier = credentials.email;
+  const identifier = credentials.email || ('identifier' in credentials ? String((credentials as Record<string, unknown>).identifier) : '');
   const portal = credentials.portalRole ?? inferPortalFromIdentifier(identifier);
 
   let user = findUserByIdentifier(identifier);

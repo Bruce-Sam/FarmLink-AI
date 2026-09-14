@@ -59,9 +59,9 @@ interface AuthProviderProps {
 }
 
 function toLoginCredentials(input: LoginInput) {
-  const identifier = input.identifier.trim();
+  const identifier = (input.identifier || '').trim();
   return {
-    email: isEmailIdentifier(identifier)
+    email: isEmailIdentifier(identifier) || identifier.includes('@')
       ? identifier
       : identifier.replace(/\s/g, ''),
     password: input.password,

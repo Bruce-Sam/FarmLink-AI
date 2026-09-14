@@ -85,8 +85,10 @@ export async function handleDemoRequest<T>(
   );
   if (ratingsMock) return ok(ratingsMock.data, ratingsMock.message);
 
-  const adminMock = await handleAdminDemoRequest<T>(method, normalizedPath, body);
-  if (adminMock) return adminMock;
+  if (normalizedPath.startsWith('/admin')) {
+    const adminMock = await handleAdminDemoRequest<T>(method, normalizedPath, body);
+    if (adminMock) return adminMock;
+  }
 
   // Auth
   if (normalizedPath === '/auth/login' && method === 'POST') {
@@ -97,7 +99,7 @@ export async function handleDemoRequest<T>(
       accessToken: demoAccessToken,
       expiresAt: new Date(Date.now() + 24 * 60 * 60 * 1000).toISOString(),
     };
-    if (credentials.email && credentials.password) {
+    if ((credentials.email || ('identifier' in credentials ? (credentials as Record<string, unknown>).identifier : undefined)) && credentials.password) {
       return ok(session as T, 'Login successful (demo mode)');
     }
     throw { message: 'Invalid credentials', code: 'INVALID_CREDENTIALS', status: 401 };
@@ -138,13 +140,19 @@ export async function handleDemoRequest<T>(
   if (normalizedPath === '/farmers/profile' && method === 'GET') {
     const profile = getFarmerProfileForCurrentUser();
     if (!profile) notFound('Farmer profile not found');
-    return ok(profile as T);
+    return ok({ profile: { ...profile, latitude: profile.gpsCoordinates?.lat, longitude: profile.gpsCoordinates?.lng } } as T);
   }
 
   if (normalizedPath === '/farmers/profile' && method === 'PUT') {
     const update = body as FarmerProfileUpdate;
     const profile = updateFarmerProfileForCurrentUser(update);
-    return ok(profile as T);
+    return ok({ profile: { ...profile, latitude: profile.gpsCoordinates?.lat, longitude: profile.gpsCoordinates?.lng } } as T);
+  }
+
+  if (normalizedPath === '/farmers/profile' && method === 'POST') {
+    const update = body as FarmerProfileUpdate;
+    const profile = updateFarmerProfileForCurrentUser(update);
+    return ok({ profile: { ...profile, latitude: profile.gpsCoordinates?.lat, longitude: profile.gpsCoordinates?.lng } } as T);
   }
 
   if (normalizedPath === '/farmers/onboarding' && method === 'POST') {

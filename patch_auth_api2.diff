@@ -1,0 +1,15 @@
+--- src/lib/api/mappers/backend-mappers.ts
++++ src/lib/api/mappers/backend-mappers.ts
+@@ -499,8 +499,10 @@
+   if (data.region) body.region = data.region;
+   if (data.district) body.district = data.district;
+   if (data.town) body.town = data.town;
+-  if (coords.latitude !== undefined) body.latitude = coords.latitude;
+-  if (coords.longitude !== undefined) body.longitude = coords.longitude;
++  if (coords) {
++    if (coords.latitude !== undefined) body.latitude = coords.latitude;
++    if (coords.longitude !== undefined) body.longitude = coords.longitude;
++  }
+   if (data.preferredProduce) body.preferredProduce = data.preferredProduce;
+   if (data.maxTravelDistanceKm != null) body.maximumTravelDistanceKm = data.maxTravelDistanceKm;
+   if (data.typicalQuantityMin != null) body.minimumOrderQuantity = data.typicalQuantityMin;

@@ -1,0 +1,11 @@
+--- src/lib/demo/demo-api.ts
++++ src/lib/demo/demo-api.ts
+@@ -95,7 +95,7 @@
+       accessToken: demoAccessToken,
+       expiresAt: new Date(Date.now() + 24 * 60 * 60 * 1000).toISOString(),
+     };
+-    if ((credentials.email || (credentials as any).identifier) && credentials.password) {
++    if (credentials.password) {
+       return ok(session as T, 'Login successful (demo mode)');
+     }
+     throw { message: 'Invalid credentials', code: 'INVALID_CREDENTIALS', status: 401 };

@@ -20,7 +20,7 @@ export async function updateFarmerProfile(update: FarmerProfileUpdate): Promise<
 
 export async function completeOnboarding(data: OnboardingData): Promise<FarmerProfile> {
   const response = await apiPost<{ profile: Record<string, unknown> }>(
-    '/farmers/profile',
+    '/farmers/onboarding',
     toBackendFarmerProfilePayload(data),
   );
   return mapBackendFarmerProfile(response.data.profile);

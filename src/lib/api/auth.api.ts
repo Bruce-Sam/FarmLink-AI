@@ -19,6 +19,7 @@ function toAuthSession(data: { user: BackendSafeUser; accessToken: string }): Au
 export async function login(credentials: LoginCredentials): Promise<AuthSession> {
   const response = await apiPost<{ user: BackendSafeUser; accessToken: string }>('/auth/login', {
     identifier: credentials.email,
+    portalRole: credentials.portalRole,
     password: credentials.password,
   });
   const session = toAuthSession(response.data);

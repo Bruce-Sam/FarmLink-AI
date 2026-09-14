@@ -1,0 +1,13 @@
+--- src/lib/api/mappers/backend-mappers.ts
++++ src/lib/api/mappers/backend-mappers.ts
+@@ -303,8 +303,8 @@
+     region: payload.region || profile.region,
+     district: payload.district || profile.district,
+     town: profile.village ?? profile.district,
+-    latitude: coords.latitude,
+-    longitude: coords.longitude,
++    latitude: coords?.latitude,
++    longitude: coords?.longitude,
+     images: payload.images,
+   };
+ }

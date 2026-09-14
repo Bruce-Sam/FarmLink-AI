@@ -1,0 +1,11 @@
+--- src/lib/api/auth.api.ts
++++ src/lib/api/auth.api.ts
+@@ -19,7 +19,7 @@
+
+ export async function login(credentials: LoginCredentials): Promise<AuthSession> {
+   const response = await apiPost<{ user: BackendSafeUser; accessToken: string }>('/auth/login', {
+-    email: credentials.email,
++    identifier: credentials.email,
+     portalRole: credentials.portalRole,
+     password: credentials.password,
+   });

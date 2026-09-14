@@ -8,7 +8,7 @@ const mockDataEnv = readEnv('NEXT_PUBLIC_USE_MOCK_DATA');
 export const config = {
   apiUrl: readEnv('NEXT_PUBLIC_API_URL') ?? 'http://localhost:4000/api/v1',
   /** Demo handlers — explicit opt-in only; production uses the real API by default. */
-  isDemoMode: demoEnv === 'true',
+  isDemoMode: demoEnv === 'true' || (typeof process !== 'undefined' && process.env.NEXT_PUBLIC_ENABLE_DEMO_MODE === 'true'),
   /** Admin mock-data mode — explicit opt-in; never silently replaces failed API calls in production. */
   useMockData: mockDataEnv === 'true',
   mapProvider: readEnv('NEXT_PUBLIC_MAP_PROVIDER') ?? 'osm',
