@@ -1,0 +1,20 @@
+--- src/lib/demo/demo-user-registry.ts
++++ src/lib/demo/demo-user-registry.ts
+@@ -107,7 +107,7 @@
+     district: '',
+     village: '',
+     primaryCrops: [],
+-    onboardingComplete: true, // auto bypass onboarding for tests
++    onboardingComplete: false,
+     createdAt: now,
+     updatedAt: now,
+   };
+@@ -131,7 +131,7 @@
+     businessName: '',
+     preferredProduce: [],
+     commonUnits: [],
+-    onboardingComplete: true, // auto bypass onboarding for tests
++    onboardingComplete: false,
+     createdAt: now,
+     updatedAt: now,
+   };

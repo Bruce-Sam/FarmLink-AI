@@ -1,0 +1,11 @@
+--- src/features/auth/components/FarmerLoginForm.tsx
++++ src/features/auth/components/FarmerLoginForm.tsx
+@@ -71,7 +71,7 @@
+
+     try {
+       await login({
+-        email: values.identifier,
++        identifier: values.identifier,
+         password: values.password,
+         remember: values.remember,
+         portalRole: 'farmer',

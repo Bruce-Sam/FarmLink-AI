@@ -1,0 +1,11 @@
+--- src/lib/demo/demo-user-registry.ts
++++ src/lib/demo/demo-user-registry.ts
+@@ -176,7 +176,7 @@
+ }
+
+ export function setDemoCurrentUserFromLogin(credentials: LoginCredentials): User {
+-  const identifier = credentials.email || (credentials as any).identifier || '';
++  const identifier = credentials.email || ('identifier' in credentials ? String((credentials as Record<string, unknown>).identifier) : '');
+   const portal = credentials.portalRole ?? inferPortalFromIdentifier(identifier);
+
+   let user = findUserByIdentifier(identifier);
