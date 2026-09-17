@@ -1,0 +1,4 @@
+## 2025-02-28 - Prevent default ADMIN_PASSWORD in production
+**Vulnerability:** The application was allowing the default admin password (`AdminPassword123!`) to be used in production environments, potentially leaving the system vulnerable to unauthorized administrative access if not explicitly overridden.
+**Learning:** Default configuration values intended for local development can inadvertently persist into production if environmental validations do not explicitly forbid them. Configuration validation logic should implement clear environment-specific boundary checks.
+**Prevention:** Ensured configuration loading mechanisms inherently block known insecure default values when operating in production environments. Added explicit check inside `src/config/env.ts` to throw an error if `config.isProduction` and `ADMIN_PASSWORD` matches the default value.
