@@ -1,0 +1,4 @@
+## 2026-09-18 - [CRITICAL] Default Admin Password Allowed in Production
+**Vulnerability:** The application allowed using the default, weak hardcoded `ADMIN_PASSWORD` ('AdminPassword123!') in production environments, creating a severe vulnerability where an attacker could compromise the admin account without knowing a customized password.
+**Learning:** Default secrets provided in code for development convenience can easily leak into production if explicit validation checks do not block them. This project's approach uses top-level environment configuration schema validation via Zod, but custom fallback behavior needs runtime guards.
+**Prevention:** Hardcoded defaults for sensitive keys/passwords must explicitly be rejected using `throw new Error(...)` during configuration loading if the `NODE_ENV` is set to 'production', similar to the `JWT_ACCESS_SECRET` check.
