@@ -1,0 +1,4 @@
+## 2024-10-25 - Unsafe Default Admin Password in Production
+**Vulnerability:** The `ADMIN_PASSWORD` environment variable in `farmlink-backend/src/config/env.ts` allowed the default value `AdminPassword123!` to be used in production environments, creating a severe risk of unauthorized administrative access.
+**Learning:** Default fallback values for sensitive secrets defined in Zod schemas can easily slip into production if explicit environment-specific checks are missing during application initialization. Security checks for default secrets must run *before* the application fully starts.
+**Prevention:** Implement explicit conditional checks early in the configuration logic (like in `env.ts`) to throw errors and halt startup if default or example values are detected for critical secrets when `NODE_ENV === 'production'`.
