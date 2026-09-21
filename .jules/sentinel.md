@@ -1,0 +1,4 @@
+## 2024-05-24 - Prevent default admin password in production
+**Vulnerability:** The application was configured to start in production with a known default `ADMIN_PASSWORD` ('AdminPassword123!') if one was not explicitly set in the environment variables. This creates a critical backdoor if not changed.
+**Learning:** Security configuration checks (such as validating production secrets) must occur early in the application lifecycle, prior to database connections or account initialization, to prevent the system from entering a temporary insecure state.
+**Prevention:** Implement checks in `src/config/env.ts` to actively throw an error and fail fast on application start if `NODE_ENV=production` and `ADMIN_PASSWORD` matches the hardcoded default. Ensure tests verify both the rejection in production and preservation of existing behavior in dev/test to avoid breaking local workflows.
