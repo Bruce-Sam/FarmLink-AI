@@ -1,0 +1,4 @@
+## 2024-10-24 - Reject default ADMIN_PASSWORD in production
+**Vulnerability:** The application was allowing the default administrative password (`AdminPassword123!`) to be used in production environments, potentially leading to unauthorized access.
+**Learning:** Security configuration checks (such as validating production secrets) must occur early in the application lifecycle. Hardcoded or default configurations are not inherently secure, and failing fast when critical secrets are unset prevents deployment of vulnerable services. Testing these checks in vitest requires `vi.resetModules()` to ensure the top-level assertions re-evaluate across multiple test cases.
+**Prevention:** Implement checks in environment configuration processing to throw errors when default or dangerous values are used for critical secrets in production. Ensure these rules are explicitly checked during startup.
