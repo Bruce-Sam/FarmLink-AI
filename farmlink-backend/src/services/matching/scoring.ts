@@ -144,7 +144,9 @@ export function buildExplanation(facts: ExplanationFacts): string {
       facts.demandRange.max !== null
         ? `${facts.demandRange.min}–${facts.demandRange.max} ${facts.demandRange.unit.toLowerCase()}`
         : `at least ${facts.demandRange.min} ${facts.demandRange.unit.toLowerCase()}`;
-    parts.push(`This buyer regularly purchases ${facts.produceName.toLowerCase()} and requires ${range}`);
+    parts.push(
+      `This buyer regularly purchases ${facts.produceName.toLowerCase()} and requires ${range}`,
+    );
   } else if (facts.isPreferredProduce) {
     parts.push(`This buyer lists ${facts.produceName.toLowerCase()} among their preferred produce`);
   } else {

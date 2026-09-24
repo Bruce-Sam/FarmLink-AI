@@ -31,11 +31,7 @@ router.get('/analytics', getAnalytics);
 
 router.get('/users', listUsers);
 router.get('/users/:userId', validate({ params: uuidParam('userId') }), getUser);
-router.patch(
-  '/users/:userId/status',
-  validate({ params: uuidParam('userId') }),
-  updateUserStatus,
-);
+router.patch('/users/:userId/status', validate({ params: uuidParam('userId') }), updateUserStatus);
 
 router.get('/listings', listListings);
 router.get('/listings/:listingId', validate({ params: uuidParam('listingId') }), getListing);

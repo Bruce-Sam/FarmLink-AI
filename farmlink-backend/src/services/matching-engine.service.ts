@@ -3,10 +3,7 @@ import { prisma } from '../config/database';
 import { logger } from '../config/logger';
 import { haversineDistanceKm } from '../utils/distance';
 import { decimalToNumber } from '../utils/money';
-import {
-  MAX_RECOMMENDATIONS_PER_LISTING,
-  MIN_RECOMMENDATION_SCORE,
-} from '../constants/matching';
+import { MAX_RECOMMENDATIONS_PER_LISTING, MIN_RECOMMENDATION_SCORE } from '../constants/matching';
 import {
   buildExplanation,
   computeScore,

@@ -211,7 +211,10 @@ export class ListingsService {
 
   async getPublicById(listingId: string): Promise<SerializedListing> {
     const listing = await prisma.produceListing.findFirst({
-      where: { id: listingId, status: { in: [ListingStatus.PUBLISHED, ListingStatus.PARTIALLY_RESERVED] } },
+      where: {
+        id: listingId,
+        status: { in: [ListingStatus.PUBLISHED, ListingStatus.PARTIALLY_RESERVED] },
+      },
       include: listingInclude,
     });
     if (!listing) throw ApiError.notFound('Listing not found or not available');
@@ -293,7 +296,9 @@ export class ListingsService {
     return { items: items.map(serializeListing), total };
   }
 
-  private resolveOrderBy(sort: MarketplaceQuery['sort']): Prisma.ProduceListingOrderByWithRelationInput {
+  private resolveOrderBy(
+    sort: MarketplaceQuery['sort'],
+  ): Prisma.ProduceListingOrderByWithRelationInput {
     switch (sort) {
       case 'oldest':
         return { createdAt: 'asc' };

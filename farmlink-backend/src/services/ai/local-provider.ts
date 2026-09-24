@@ -1,10 +1,6 @@
 import { type AIExtractionProvider } from './provider';
 import { type ExtractionInput, type ExtractionResult } from './extraction.schema';
-import {
-  categoryNameFromSlug,
-  normalizeProduceName,
-  normalizeUnit,
-} from '../../constants/produce';
+import { categoryNameFromSlug, normalizeProduceName, normalizeUnit } from '../../constants/produce';
 import { detectLocationInText } from '../geolocation.service';
 
 const WEEKDAYS: Record<string, number> = {
@@ -71,7 +67,10 @@ function parseRelativeDate(text: string, ref: Date): Date | null {
   return null;
 }
 
-function parseQuantityAndUnit(text: string): { quantity: number | null; unit: ReturnType<typeof normalizeUnit> } {
+function parseQuantityAndUnit(text: string): {
+  quantity: number | null;
+  unit: ReturnType<typeof normalizeUnit>;
+} {
   const match = text.match(
     /(\d+(?:\.\d+)?)\s*(kgs?|kilo(?:gram)?s?|tonnes?|tons?|crates?|bags?|boxe?s?|bunch(?:es)?|pieces?|pcs|baskets?|sacks?)/i,
   );
@@ -133,7 +132,9 @@ export const localExtractionProvider: AIExtractionProvider = {
     const clarificationQuestions: string[] = [];
     if (!produceName) clarificationQuestions.push('What produce are you offering?');
     if (quantity === null || !unit) {
-      clarificationQuestions.push('How much produce do you have, and in what unit (crates, bags, kg)?');
+      clarificationQuestions.push(
+        'How much produce do you have, and in what unit (crates, bags, kg)?',
+      );
     }
     if (pricePerUnit === null) clarificationQuestions.push('What price are you asking per unit?');
     if (!dateStr) clarificationQuestions.push('When will the produce be ready or available?');
