@@ -91,12 +91,54 @@ async function main(): Promise<void> {
 
   // Farmers (5+)
   const farmerDefs = [
-    { name: 'Kwame Mensah', phone: '+233244123456', email: 'farmer@farmlink.local', town: 'Agogo', farm: 'Sunrise Valley Farm', crops: ['tomatoes', 'pepper'] },
-    { name: 'Akosua Adjei', phone: '+233244234567', email: 'akosua.adjei@example.com', town: 'Ejura', farm: 'Green Harvest Farms', crops: ['maize', 'cassava'] },
-    { name: 'Yaw Osei', phone: '+233244345678', email: 'yaw.osei@example.com', town: 'Techiman', farm: 'Bono Produce Co-op', crops: ['plantain', 'yam'] },
-    { name: 'Abena Frimpong', phone: '+233244456789', email: 'abena.frimpong@example.com', town: 'Koforidua', farm: 'Eastern Fresh Farms', crops: ['pineapple', 'mango'] },
-    { name: 'Kofi Asante', phone: '+233244567890', email: 'kofi.asante@example.com', town: 'Tamale', farm: 'Northern Greens', crops: ['onions', 'tomatoes'] },
-    { name: 'Efua Boateng', phone: '+233244678901', email: 'efua.boateng@example.com', town: 'Cape Coast', farm: 'Coastal Harvest', crops: ['okra', 'cabbage'] },
+    {
+      name: 'Kwame Mensah',
+      phone: '+233244123456',
+      email: 'farmer@farmlink.local',
+      town: 'Agogo',
+      farm: 'Sunrise Valley Farm',
+      crops: ['tomatoes', 'pepper'],
+    },
+    {
+      name: 'Akosua Adjei',
+      phone: '+233244234567',
+      email: 'akosua.adjei@example.com',
+      town: 'Ejura',
+      farm: 'Green Harvest Farms',
+      crops: ['maize', 'cassava'],
+    },
+    {
+      name: 'Yaw Osei',
+      phone: '+233244345678',
+      email: 'yaw.osei@example.com',
+      town: 'Techiman',
+      farm: 'Bono Produce Co-op',
+      crops: ['plantain', 'yam'],
+    },
+    {
+      name: 'Abena Frimpong',
+      phone: '+233244456789',
+      email: 'abena.frimpong@example.com',
+      town: 'Koforidua',
+      farm: 'Eastern Fresh Farms',
+      crops: ['pineapple', 'mango'],
+    },
+    {
+      name: 'Kofi Asante',
+      phone: '+233244567890',
+      email: 'kofi.asante@example.com',
+      town: 'Tamale',
+      farm: 'Northern Greens',
+      crops: ['onions', 'tomatoes'],
+    },
+    {
+      name: 'Efua Boateng',
+      phone: '+233244678901',
+      email: 'efua.boateng@example.com',
+      town: 'Cape Coast',
+      farm: 'Coastal Harvest',
+      crops: ['okra', 'cabbage'],
+    },
   ];
 
   const farmers = [];
@@ -107,7 +149,9 @@ async function main(): Promise<void> {
         fullName: f.name,
         phoneNumber: f.phone,
         email: f.email,
-        passwordHash: await hash(f.email === 'farmer@farmlink.local' ? DEMO_PASSWORDS.farmer : 'DemoFarmer123!'),
+        passwordHash: await hash(
+          f.email === 'farmer@farmlink.local' ? DEMO_PASSWORDS.farmer : 'DemoFarmer123!',
+        ),
         role: Role.FARMER,
         accountStatus: AccountStatus.ACTIVE,
         phoneVerified: true,
@@ -125,7 +169,10 @@ async function main(): Promise<void> {
         longitude: l.longitude,
         primaryCrops: f.crops,
         farmSizeAcres: 12 + Math.floor(Math.random() * 20),
-        verificationStatus: f.email === 'farmer@farmlink.local' ? VerificationStatus.VERIFIED : VerificationStatus.PENDING,
+        verificationStatus:
+          f.email === 'farmer@farmlink.local'
+            ? VerificationStatus.VERIFIED
+            : VerificationStatus.PENDING,
       },
     });
     farmers.push({ user, profile });
@@ -133,13 +180,62 @@ async function main(): Promise<void> {
 
   // Buyers (6+)
   const buyerDefs = [
-    { name: 'Golden Spoon Restaurant', phone: '+233244555667', email: 'buyer@farmlink.local', town: 'Kumasi', type: BuyerType.RESTAURANT, prefs: ['tomatoes', 'onions', 'pepper'] },
-    { name: 'Accra Fresh Hotels', phone: '+233244666778', email: 'orders@accrahotels.gh', town: 'Accra', type: BuyerType.HOTEL, prefs: ['pineapple', 'watermelon', 'mango'] },
-    { name: 'Cape Coast Academy', phone: '+233244777889', email: 'kitchen@ccacademy.edu.gh', town: 'Cape Coast', type: BuyerType.SCHOOL, prefs: ['rice', 'plantain', 'cassava'] },
-    { name: 'Kasoa Market Traders Union', phone: '+233244888990', email: 'procurement@kasoamarket.gh', town: 'Kasoa', type: BuyerType.MARKET_TRADER, prefs: ['tomatoes', 'onions', 'pepper'] },
-    { name: 'Techiman Wholesalers Ltd', phone: '+233244999001', email: 'buy@techimanwholesale.gh', town: 'Techiman', type: BuyerType.WHOLESALER, prefs: ['maize', 'yam', 'cassava'] },
-    { name: 'Volta Foods Processing', phone: '+233244100112', email: 'supply@voltafoods.gh', town: 'Ho', type: BuyerType.PROCESSOR, prefs: ['cassava', 'plantain', 'maize'] },
-    { name: 'Sunyani Supermarket Chain', phone: '+233244111223', email: 'procure@sunyanism.gh', town: 'Sunyani', type: BuyerType.SUPERMARKET, prefs: ['tomatoes', 'carrots', 'cabbage'] },
+    {
+      name: 'Golden Spoon Restaurant',
+      phone: '+233244555667',
+      email: 'buyer@farmlink.local',
+      town: 'Kumasi',
+      type: BuyerType.RESTAURANT,
+      prefs: ['tomatoes', 'onions', 'pepper'],
+    },
+    {
+      name: 'Accra Fresh Hotels',
+      phone: '+233244666778',
+      email: 'orders@accrahotels.gh',
+      town: 'Accra',
+      type: BuyerType.HOTEL,
+      prefs: ['pineapple', 'watermelon', 'mango'],
+    },
+    {
+      name: 'Cape Coast Academy',
+      phone: '+233244777889',
+      email: 'kitchen@ccacademy.edu.gh',
+      town: 'Cape Coast',
+      type: BuyerType.SCHOOL,
+      prefs: ['rice', 'plantain', 'cassava'],
+    },
+    {
+      name: 'Kasoa Market Traders Union',
+      phone: '+233244888990',
+      email: 'procurement@kasoamarket.gh',
+      town: 'Kasoa',
+      type: BuyerType.MARKET_TRADER,
+      prefs: ['tomatoes', 'onions', 'pepper'],
+    },
+    {
+      name: 'Techiman Wholesalers Ltd',
+      phone: '+233244999001',
+      email: 'buy@techimanwholesale.gh',
+      town: 'Techiman',
+      type: BuyerType.WHOLESALER,
+      prefs: ['maize', 'yam', 'cassava'],
+    },
+    {
+      name: 'Volta Foods Processing',
+      phone: '+233244100112',
+      email: 'supply@voltafoods.gh',
+      town: 'Ho',
+      type: BuyerType.PROCESSOR,
+      prefs: ['cassava', 'plantain', 'maize'],
+    },
+    {
+      name: 'Sunyani Supermarket Chain',
+      phone: '+233244111223',
+      email: 'procure@sunyanism.gh',
+      town: 'Sunyani',
+      type: BuyerType.SUPERMARKET,
+      prefs: ['tomatoes', 'carrots', 'cabbage'],
+    },
   ];
 
   const buyers = [];
@@ -150,7 +246,9 @@ async function main(): Promise<void> {
         fullName: b.name,
         phoneNumber: b.phone,
         email: b.email,
-        passwordHash: await hash(b.email === 'buyer@farmlink.local' ? DEMO_PASSWORDS.buyer : 'DemoBuyer123!'),
+        passwordHash: await hash(
+          b.email === 'buyer@farmlink.local' ? DEMO_PASSWORDS.buyer : 'DemoBuyer123!',
+        ),
         role: Role.BUYER,
         accountStatus: AccountStatus.ACTIVE,
         phoneVerified: true,
@@ -170,7 +268,10 @@ async function main(): Promise<void> {
         preferredProduce: b.prefs,
         minimumOrderQuantity: 10,
         maximumTravelDistanceKm: 100,
-        verificationStatus: b.email === 'buyer@farmlink.local' ? VerificationStatus.VERIFIED : VerificationStatus.UNVERIFIED,
+        verificationStatus:
+          b.email === 'buyer@farmlink.local'
+            ? VerificationStatus.VERIFIED
+            : VerificationStatus.UNVERIFIED,
       },
     });
     buyers.push({ user, profile });
@@ -225,17 +326,127 @@ async function main(): Promise<void> {
 
   // Listings (10+)
   const listingDefs = [
-    { farmer: 0, slug: 'tomatoes', title: 'Fresh tomatoes — Agogo harvest', qty: 60, unit: ProduceUnit.CRATE, price: 180, town: 'Agogo', status: ListingStatus.PUBLISHED, source: ListingSourceType.VOICE_TRANSCRIPTION },
-    { farmer: 0, slug: 'pepper', title: 'Red pepper crates available', qty: 30, unit: ProduceUnit.CRATE, price: 220, town: 'Agogo', status: ListingStatus.PUBLISHED, source: ListingSourceType.FORM },
-    { farmer: 1, slug: 'maize', title: 'Maize bags from Ejura', qty: 200, unit: ProduceUnit.BAG, price: 95, town: 'Ejura', status: ListingStatus.PUBLISHED, source: ListingSourceType.TEXT },
-    { farmer: 2, slug: 'plantain', title: 'Plantain bunches — Techiman', qty: 80, unit: ProduceUnit.BUNCH, price: 25, town: 'Techiman', status: ListingStatus.PUBLISHED, source: ListingSourceType.FORM },
-    { farmer: 3, slug: 'pineapple', title: 'Sweet pineapple boxes', qty: 120, unit: ProduceUnit.BOX, price: 45, town: 'Koforidua', status: ListingStatus.PUBLISHED, source: ListingSourceType.FORM },
-    { farmer: 4, slug: 'onions', title: 'Northern onions sacks', qty: 150, unit: ProduceUnit.SACK, price: 110, town: 'Tamale', status: ListingStatus.PUBLISHED, source: ListingSourceType.TEXT },
-    { farmer: 5, slug: 'okra', title: 'Fresh okra baskets', qty: 40, unit: ProduceUnit.BASKET, price: 60, town: 'Cape Coast', status: ListingStatus.DRAFT, source: ListingSourceType.FORM },
-    { farmer: 1, slug: 'cassava', title: 'Cassava tonnes bulk', qty: 5, unit: ProduceUnit.TONNE, price: 1200, town: 'Ejura', status: ListingStatus.PUBLISHED, source: ListingSourceType.FORM },
-    { farmer: 2, slug: 'yam', title: 'Yam harvest — Bono region', qty: 300, unit: ProduceUnit.PIECE, price: 15, town: 'Techiman', status: ListingStatus.PUBLISHED, source: ListingSourceType.FORM },
-    { farmer: 0, slug: 'tomatoes', title: 'Second tomato batch next week', qty: 45, unit: ProduceUnit.CRATE, price: 175, town: 'Agogo', status: ListingStatus.PUBLISHED, source: ListingSourceType.VOICE_TRANSCRIPTION },
-    { farmer: 3, slug: 'mango', title: 'Mango crates — Eastern region', qty: 70, unit: ProduceUnit.CRATE, price: 90, town: 'Koforidua', status: ListingStatus.PARTIALLY_RESERVED, source: ListingSourceType.FORM },
+    {
+      farmer: 0,
+      slug: 'tomatoes',
+      title: 'Fresh tomatoes — Agogo harvest',
+      qty: 60,
+      unit: ProduceUnit.CRATE,
+      price: 180,
+      town: 'Agogo',
+      status: ListingStatus.PUBLISHED,
+      source: ListingSourceType.VOICE_TRANSCRIPTION,
+    },
+    {
+      farmer: 0,
+      slug: 'pepper',
+      title: 'Red pepper crates available',
+      qty: 30,
+      unit: ProduceUnit.CRATE,
+      price: 220,
+      town: 'Agogo',
+      status: ListingStatus.PUBLISHED,
+      source: ListingSourceType.FORM,
+    },
+    {
+      farmer: 1,
+      slug: 'maize',
+      title: 'Maize bags from Ejura',
+      qty: 200,
+      unit: ProduceUnit.BAG,
+      price: 95,
+      town: 'Ejura',
+      status: ListingStatus.PUBLISHED,
+      source: ListingSourceType.TEXT,
+    },
+    {
+      farmer: 2,
+      slug: 'plantain',
+      title: 'Plantain bunches — Techiman',
+      qty: 80,
+      unit: ProduceUnit.BUNCH,
+      price: 25,
+      town: 'Techiman',
+      status: ListingStatus.PUBLISHED,
+      source: ListingSourceType.FORM,
+    },
+    {
+      farmer: 3,
+      slug: 'pineapple',
+      title: 'Sweet pineapple boxes',
+      qty: 120,
+      unit: ProduceUnit.BOX,
+      price: 45,
+      town: 'Koforidua',
+      status: ListingStatus.PUBLISHED,
+      source: ListingSourceType.FORM,
+    },
+    {
+      farmer: 4,
+      slug: 'onions',
+      title: 'Northern onions sacks',
+      qty: 150,
+      unit: ProduceUnit.SACK,
+      price: 110,
+      town: 'Tamale',
+      status: ListingStatus.PUBLISHED,
+      source: ListingSourceType.TEXT,
+    },
+    {
+      farmer: 5,
+      slug: 'okra',
+      title: 'Fresh okra baskets',
+      qty: 40,
+      unit: ProduceUnit.BASKET,
+      price: 60,
+      town: 'Cape Coast',
+      status: ListingStatus.DRAFT,
+      source: ListingSourceType.FORM,
+    },
+    {
+      farmer: 1,
+      slug: 'cassava',
+      title: 'Cassava tonnes bulk',
+      qty: 5,
+      unit: ProduceUnit.TONNE,
+      price: 1200,
+      town: 'Ejura',
+      status: ListingStatus.PUBLISHED,
+      source: ListingSourceType.FORM,
+    },
+    {
+      farmer: 2,
+      slug: 'yam',
+      title: 'Yam harvest — Bono region',
+      qty: 300,
+      unit: ProduceUnit.PIECE,
+      price: 15,
+      town: 'Techiman',
+      status: ListingStatus.PUBLISHED,
+      source: ListingSourceType.FORM,
+    },
+    {
+      farmer: 0,
+      slug: 'tomatoes',
+      title: 'Second tomato batch next week',
+      qty: 45,
+      unit: ProduceUnit.CRATE,
+      price: 175,
+      town: 'Agogo',
+      status: ListingStatus.PUBLISHED,
+      source: ListingSourceType.VOICE_TRANSCRIPTION,
+    },
+    {
+      farmer: 3,
+      slug: 'mango',
+      title: 'Mango crates — Eastern region',
+      qty: 70,
+      unit: ProduceUnit.CRATE,
+      price: 90,
+      town: 'Koforidua',
+      status: ListingStatus.PARTIALLY_RESERVED,
+      source: ListingSourceType.FORM,
+    },
   ];
 
   const listings = [];
@@ -262,7 +473,10 @@ async function main(): Promise<void> {
         longitude: l.longitude,
         status: ld.status,
         sourceType: ld.source,
-        rawInputText: ld.source === ListingSourceType.VOICE_TRANSCRIPTION ? `I have ${ld.qty} ${ld.unit.toLowerCase()} of ${ld.slug} ready next week at ${l.town}` : null,
+        rawInputText:
+          ld.source === ListingSourceType.VOICE_TRANSCRIPTION
+            ? `I have ${ld.qty} ${ld.unit.toLowerCase()} of ${ld.slug} ready next week at ${l.town}`
+            : null,
         aiExtractionConfidence: ld.source === ListingSourceType.VOICE_TRANSCRIPTION ? 0.91 : null,
         publishedAt: ld.status !== ListingStatus.DRAFT ? daysFromNow(-1) : null,
       },
@@ -284,7 +498,7 @@ async function main(): Promise<void> {
       dateScore: 95,
       priceScore: 100,
       explanation:
-        'This buyer regularly purchases tomatoes, requires 40–100 crates, is located 32 km away and needs delivery within the listing\'s availability period.',
+        "This buyer regularly purchases tomatoes, requires 40–100 crates, is located 32 km away and needs delivery within the listing's availability period.",
       status: MatchStatus.RECOMMENDED,
     },
   });
@@ -425,17 +639,39 @@ async function main(): Promise<void> {
   // Audit logs
   await prisma.auditLog.createMany({
     data: [
-      { actorUserId: admin.id, action: 'SEED_COMPLETED', entityType: 'System', metadata: { version: '0.1.0' } },
-      { actorUserId: farmers[0].user.id, action: 'LISTING_PUBLISHED', entityType: 'ProduceListing', entityId: tomatoListing.id },
-      { actorUserId: goldenSpoon.user.id, action: 'OFFER_CREATED', entityType: 'Offer', entityId: pendingOffer.id },
-      { actorUserId: farmers[3].user.id, action: 'OFFER_ACCEPTED', entityType: 'Offer', entityId: acceptedOffer.id },
+      {
+        actorUserId: admin.id,
+        action: 'SEED_COMPLETED',
+        entityType: 'System',
+        metadata: { version: '0.1.0' },
+      },
+      {
+        actorUserId: farmers[0].user.id,
+        action: 'LISTING_PUBLISHED',
+        entityType: 'ProduceListing',
+        entityId: tomatoListing.id,
+      },
+      {
+        actorUserId: goldenSpoon.user.id,
+        action: 'OFFER_CREATED',
+        entityType: 'Offer',
+        entityId: pendingOffer.id,
+      },
+      {
+        actorUserId: farmers[3].user.id,
+        action: 'OFFER_ACCEPTED',
+        entityType: 'Offer',
+        entityId: acceptedOffer.id,
+      },
     ],
   });
 
   console.log('✅ Seed complete');
   console.log('');
   console.log('Demo credentials (development only):');
-  console.log(`  Admin:  ${process.env.ADMIN_EMAIL ?? 'admin@farmlink.local'} / ${DEMO_PASSWORDS.admin}`);
+  console.log(
+    `  Admin:  ${process.env.ADMIN_EMAIL ?? 'admin@farmlink.local'} / ${DEMO_PASSWORDS.admin}`,
+  );
   console.log('  Farmer: farmer@farmlink.local / FarmerPassword123!');
   console.log('  Buyer:  buyer@farmlink.local / BuyerPassword123!');
   console.log('');

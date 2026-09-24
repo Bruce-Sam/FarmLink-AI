@@ -45,7 +45,11 @@ export const getUser = asyncHandler(async (req: Request, res: Response) => {
 
 export const updateUserStatus = asyncHandler(async (req: Request, res: Response) => {
   const { status } = updateUserStatusSchema.parse(req.body);
-  const user = await adminService.updateUserStatus(requireAdminId(req), getParam(req, 'userId'), status);
+  const user = await adminService.updateUserStatus(
+    requireAdminId(req),
+    getParam(req, 'userId'),
+    status,
+  );
   successResponse(res, { message: 'User status updated', data: { user } });
 });
 
@@ -105,7 +109,10 @@ export const listMatches = asyncHandler(async (req: Request, res: Response) => {
 });
 
 export const regenerateMatches = asyncHandler(async (req: Request, res: Response) => {
-  const result = await adminService.regenerateMatches(requireAdminId(req), getParam(req, 'listingId'));
+  const result = await adminService.regenerateMatches(
+    requireAdminId(req),
+    getParam(req, 'listingId'),
+  );
   successResponse(res, { message: 'Matches regenerated', data: result });
 });
 

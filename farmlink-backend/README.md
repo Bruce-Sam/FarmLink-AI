@@ -39,16 +39,16 @@ flowchart LR
 
 ## Technology stack
 
-| Layer | Tools |
-|-------|-------|
-| Runtime | Node.js 20+, TypeScript |
-| HTTP | Express 5, Helmet, CORS, express-rate-limit |
-| Database | PostgreSQL, Prisma ORM |
-| Auth | JWT, bcrypt |
-| Validation | Zod |
-| Logging | Pino, pino-http |
-| Testing | Vitest, Supertest |
-| Docs | Swagger / OpenAPI |
+| Layer      | Tools                                       |
+| ---------- | ------------------------------------------- |
+| Runtime    | Node.js 20+, TypeScript                     |
+| HTTP       | Express 5, Helmet, CORS, express-rate-limit |
+| Database   | PostgreSQL, Prisma ORM                      |
+| Auth       | JWT, bcrypt                                 |
+| Validation | Zod                                         |
+| Logging    | Pino, pino-http                             |
+| Testing    | Vitest, Supertest                           |
+| Docs       | Swagger / OpenAPI                           |
 
 ## Directory structure
 
@@ -91,12 +91,12 @@ cp .env.example .env
 
 Required variables (see `.env.example`):
 
-| Variable | Description |
-|----------|-------------|
-| `DATABASE_URL` | PostgreSQL connection string |
-| `JWT_ACCESS_SECRET` | Min 16 characters |
-| `CORS_ORIGINS` | Comma-separated frontend URLs |
-| `AI_PROVIDER` | `local` (default, no API key needed) |
+| Variable            | Description                          |
+| ------------------- | ------------------------------------ |
+| `DATABASE_URL`      | PostgreSQL connection string         |
+| `JWT_ACCESS_SECRET` | Min 16 characters                    |
+| `CORS_ORIGINS`      | Comma-separated frontend URLs        |
+| `AI_PROVIDER`       | `local` (default, no API key needed) |
 
 ## Local PostgreSQL (Docker)
 
@@ -141,11 +141,11 @@ Bearer token: use the `accessToken` returned from login.
 
 ## Demo credentials (development only)
 
-| Role | Email | Password |
-|------|-------|----------|
-| Admin | `admin@farmlink.local` | `AdminPassword123!` |
+| Role   | Email                   | Password             |
+| ------ | ----------------------- | -------------------- |
+| Admin  | `admin@farmlink.local`  | `AdminPassword123!`  |
 | Farmer | `farmer@farmlink.local` | `FarmerPassword123!` |
-| Buyer | `buyer@farmlink.local` | `BuyerPassword123!` |
+| Buyer  | `buyer@farmlink.local`  | `BuyerPassword123!`  |
 
 Additional seeded users use password `DemoFarmer123!` or `DemoBuyer123!`.
 
@@ -153,18 +153,18 @@ Additional seeded users use password `DemoFarmer123!` or `DemoBuyer123!`.
 
 Base path: `/api/v1`
 
-| Area | Routes |
-|------|--------|
-| Health | `GET /health`, `GET /api/v1/health` |
-| Auth | `POST /auth/register`, `POST /auth/login`, `GET /auth/me` |
-| Categories | `GET /categories`, `GET /categories/:id` |
-| Farmer | `POST/GET/PATCH /farmers/profile`, listing & offer routes |
-| Buyer | `POST/GET/PATCH /buyers/profile`, demands, recommendations, offers |
-| Listings | `POST /listings/extract`, CRUD, publish, cancel, matches |
-| Marketplace | `GET /marketplace/listings` |
-| Offers | `POST /offers` |
-| Notifications | `GET /notifications`, unread count, mark read |
-| Admin | `/admin/dashboard`, users, listings, offers, transactions, audit logs |
+| Area          | Routes                                                                |
+| ------------- | --------------------------------------------------------------------- |
+| Health        | `GET /health`, `GET /api/v1/health`                                   |
+| Auth          | `POST /auth/register`, `POST /auth/login`, `GET /auth/me`             |
+| Categories    | `GET /categories`, `GET /categories/:id`                              |
+| Farmer        | `POST/GET/PATCH /farmers/profile`, listing & offer routes             |
+| Buyer         | `POST/GET/PATCH /buyers/profile`, demands, recommendations, offers    |
+| Listings      | `POST /listings/extract`, CRUD, publish, cancel, matches              |
+| Marketplace   | `GET /marketplace/listings`                                           |
+| Offers        | `POST /offers`                                                        |
+| Notifications | `GET /notifications`, unread count, mark read                         |
+| Admin         | `/admin/dashboard`, users, listings, offers, transactions, audit logs |
 
 ## AI extraction architecture
 
@@ -192,13 +192,13 @@ The **local provider** parses common Ghanaian farmer phrases (quantity, unit, pr
 
 Weighted score (0–100):
 
-| Dimension | Weight |
-|-----------|--------|
-| Produce compatibility | 35% |
-| Quantity compatibility | 20% |
-| Distance (Haversine) | 20% |
-| Date compatibility | 15% |
-| Price compatibility | 10% |
+| Dimension              | Weight |
+| ---------------------- | ------ |
+| Produce compatibility  | 35%    |
+| Quantity compatibility | 20%    |
+| Distance (Haversine)   | 20%    |
+| Date compatibility     | 15%    |
+| Price compatibility    | 10%    |
 
 Matches are generated automatically when a listing is published. Duplicate recommendations are prevented via a unique `[listingId, buyerId]` constraint with upsert on regeneration.
 

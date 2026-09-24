@@ -59,7 +59,11 @@ export const getDemand = asyncHandler(async (req: Request, res: Response) => {
 
 export const updateDemand = asyncHandler(async (req: Request, res: Response) => {
   const input = updateDemandSchema.parse(req.body);
-  const demand = await buyersService.updateDemand(requireUserId(req), getParam(req, 'demandId'), input);
+  const demand = await buyersService.updateDemand(
+    requireUserId(req),
+    getParam(req, 'demandId'),
+    input,
+  );
   successResponse(res, { message: 'Demand updated', data: { demand } });
 });
 

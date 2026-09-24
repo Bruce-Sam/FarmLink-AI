@@ -8,6 +8,10 @@ const router = Router();
 
 router.use(authenticate);
 router.get('/listings', browseMarketplace);
-router.get('/listings/:listingId', validate({ params: uuidParam('listingId') }), getMarketplaceListing);
+router.get(
+  '/listings/:listingId',
+  validate({ params: uuidParam('listingId') }),
+  getMarketplaceListing,
+);
 
 export const marketplaceRoutes = router;

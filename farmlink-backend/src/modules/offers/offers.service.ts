@@ -72,7 +72,11 @@ export class OffersService {
 
     // Reflect interest on the recommendation, if one exists.
     await prisma.matchRecommendation.updateMany({
-      where: { listingId: listing.id, buyerId, status: { in: [MatchStatus.RECOMMENDED, MatchStatus.VIEWED] } },
+      where: {
+        listingId: listing.id,
+        buyerId,
+        status: { in: [MatchStatus.RECOMMENDED, MatchStatus.VIEWED] },
+      },
       data: { status: MatchStatus.OFFERED },
     });
 
@@ -145,7 +149,10 @@ export class OffersService {
     const farmerId = await farmersService.requireProfileId(userId);
     const offer = await prisma.offer.findUnique({
       where: { id: offerId },
-      include: { listing: { select: { farmerId: true, title: true } }, buyer: { select: { userId: true } } },
+      include: {
+        listing: { select: { farmerId: true, title: true } },
+        buyer: { select: { userId: true } },
+      },
     });
     if (!offer || offer.listing.farmerId !== farmerId) throw ApiError.notFound('Offer not found');
     if (offer.status !== OfferStatus.PENDING) {
@@ -180,7 +187,15 @@ export class OffersService {
       const offer = await tx.offer.findUnique({
         where: { id: offerId },
         include: {
-          listing: { select: { id: true, farmerId: true, quantity: true, reservedQuantity: true, title: true } },
+          listing: {
+            select: {
+              id: true,
+              farmerId: true,
+              quantity: true,
+              reservedQuantity: true,
+              title: true,
+            },
+          },
           buyer: { select: { id: true, userId: true } },
         },
       });
@@ -342,10 +357,7 @@ export class OffersService {
     return serializeTransaction(tx);
   }
 
-  private buildOfferWhere(
-    base: Prisma.OfferWhereInput,
-    status?: string,
-  ): Prisma.OfferWhereInput {
+  private buildOfferWhere(base: Prisma.OfferWhereInput, status?: string): Prisma.OfferWhereInput {
     if (status) {
       const key = status.toUpperCase();
       if (key in OfferStatus) {
