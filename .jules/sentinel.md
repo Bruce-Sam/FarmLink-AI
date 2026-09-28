@@ -1,0 +1,4 @@
+## 2024-05-24 - [Reject default ADMIN_PASSWORD in production]
+**Vulnerability:** The application was not rejecting the default `ADMIN_PASSWORD` in production environments, leaving it vulnerable to unauthorized administrative access.
+**Learning:** Security configuration checks (such as validating production secrets) must occur early in the application lifecycle, prior to database connections or account initialization, to prevent the system from entering a temporary insecure state.
+**Prevention:** Always implement a fail-fast mechanism in configuration validation to reject default or unsafe values for critical secrets in production environments. Ensure comprehensive testing is in place to verify both the rejection in production and the preservation of existing behavior in development/test environments to ensure CI and local dev are not broken.
