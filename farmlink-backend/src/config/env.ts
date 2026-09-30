@@ -9,9 +9,7 @@ const envSchema = z.object({
 
   DATABASE_URL: z.string().min(1, 'DATABASE_URL is required'),
 
-  JWT_ACCESS_SECRET: z
-    .string()
-    .min(16, 'JWT_ACCESS_SECRET must be at least 16 characters'),
+  JWT_ACCESS_SECRET: z.string().min(16, 'JWT_ACCESS_SECRET must be at least 16 characters'),
   JWT_ACCESS_EXPIRES_IN: z.string().default('1d'),
   BCRYPT_SALT_ROUNDS: z.coerce.number().int().min(4).max(15).default(10),
 
@@ -25,11 +23,13 @@ const envSchema = z.object({
         .filter(Boolean),
     ),
 
-  LOG_LEVEL: z
-    .enum(['fatal', 'error', 'warn', 'info', 'debug', 'trace', 'silent'])
-    .default('info'),
+  LOG_LEVEL: z.enum(['fatal', 'error', 'warn', 'info', 'debug', 'trace', 'silent']).default('info'),
 
-  RATE_LIMIT_WINDOW_MS: z.coerce.number().int().positive().default(15 * 60 * 1000),
+  RATE_LIMIT_WINDOW_MS: z.coerce
+    .number()
+    .int()
+    .positive()
+    .default(15 * 60 * 1000),
   RATE_LIMIT_MAX: z.coerce.number().int().positive().default(300),
   AUTH_RATE_LIMIT_MAX: z.coerce.number().int().positive().default(20),
 
@@ -74,4 +74,8 @@ export const config = buildConfig();
 // Avoid the obvious but dangerous default in production.
 if (config.isProduction && config.JWT_ACCESS_SECRET.includes('replace-with')) {
   throw new Error('JWT_ACCESS_SECRET must be changed from the example value in production.');
+}
+
+if (config.isProduction && config.ADMIN_PASSWORD === 'AdminPassword123!') {
+  throw new Error('ADMIN_PASSWORD must be changed from the default value in production.');
 }
