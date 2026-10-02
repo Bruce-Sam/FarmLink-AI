@@ -1,0 +1,4 @@
+## 2024-10-02 - Prevent default ADMIN_PASSWORD in production
+**Vulnerability:** The application used a default `ADMIN_PASSWORD` ('AdminPassword123!') defined in `src/config/env.ts` using Zod's `default()`. In production environments, if the user didn't explicitly override it via an environment variable, the application would start up with a predictable admin password, enabling unauthorized access.
+**Learning:** Security configuration checks (such as validating production secrets against known insecure defaults) must occur early in the application lifecycle. Zod `default()` values can obscure missing secrets if not explicitly checked against in production.
+**Prevention:** Always validate that critical security configurations (e.g., admin passwords, API keys) are explicitly set and do not match known default or sample values when running in a production environment. Apply checks right after configuration parsing.
