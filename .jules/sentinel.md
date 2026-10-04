@@ -1,0 +1,4 @@
+## 2024-10-04 - Default Admin Password Rejected in Production
+**Vulnerability:** The backend configuration `src/config/env.ts` specified a default `ADMIN_PASSWORD` ('AdminPassword123!') but did not enforce changing it in production. This could allow attackers to gain unauthorized administrative access if the application is deployed without explicitly configuring `ADMIN_PASSWORD`.
+**Learning:** Default secrets defined in Zod schemas or similar config management tools must have explicit enforcement mechanisms (like startup failure) in production environments to prevent accidental insecure deployments.
+**Prevention:** Implement explicit runtime checks in environment configuration files that verify critical secrets (e.g., passwords, API keys) against their default values when `NODE_ENV=production`. Throw an error and halt startup if a default value is detected for a critical secret.
