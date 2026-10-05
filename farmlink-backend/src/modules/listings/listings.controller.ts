@@ -51,7 +51,11 @@ export const getListingById = asyncHandler(async (req: Request, res: Response) =
 
 export const updateListing = asyncHandler(async (req: Request, res: Response) => {
   const input = updateListingSchema.parse(req.body);
-  const listing = await listingsService.update(requireUserId(req), getParam(req, 'listingId'), input);
+  const listing = await listingsService.update(
+    requireUserId(req),
+    getParam(req, 'listingId'),
+    input,
+  );
   successResponse(res, { message: 'Listing updated', data: { listing } });
 });
 

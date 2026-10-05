@@ -155,7 +155,12 @@ function jsonBody(ref: string): Operation {
 function buildPaths(): Record<string, unknown> {
   return {
     '/health': {
-      get: { tags: ['Health'], security: [], summary: 'Service health', responses: { 200: ok('Healthy') } },
+      get: {
+        tags: ['Health'],
+        security: [],
+        summary: 'Service health',
+        responses: { 200: ok('Healthy') },
+      },
     },
     '/auth/register': {
       post: {
@@ -179,24 +184,61 @@ function buildPaths(): Record<string, unknown> {
       get: { tags: ['Auth'], summary: 'Current user', responses: { 200: ok('Current user') } },
     },
     '/categories': {
-      get: { tags: ['Categories'], security: [], summary: 'List produce categories', responses: { 200: ok('Categories') } },
+      get: {
+        tags: ['Categories'],
+        security: [],
+        summary: 'List produce categories',
+        responses: { 200: ok('Categories') },
+      },
     },
     '/farmers/profile': {
-      post: { tags: ['Farmer Profiles'], summary: 'Create farmer profile', responses: { 201: ok('Created') } },
-      get: { tags: ['Farmer Profiles'], summary: 'Get farmer profile', responses: { 200: ok('Profile') } },
-      patch: { tags: ['Farmer Profiles'], summary: 'Update farmer profile', responses: { 200: ok('Updated') } },
+      post: {
+        tags: ['Farmer Profiles'],
+        summary: 'Create farmer profile',
+        responses: { 201: ok('Created') },
+      },
+      get: {
+        tags: ['Farmer Profiles'],
+        summary: 'Get farmer profile',
+        responses: { 200: ok('Profile') },
+      },
+      patch: {
+        tags: ['Farmer Profiles'],
+        summary: 'Update farmer profile',
+        responses: { 200: ok('Updated') },
+      },
     },
     '/buyers/profile': {
-      post: { tags: ['Buyer Profiles'], summary: 'Create buyer profile', responses: { 201: ok('Created') } },
-      get: { tags: ['Buyer Profiles'], summary: 'Get buyer profile', responses: { 200: ok('Profile') } },
-      patch: { tags: ['Buyer Profiles'], summary: 'Update buyer profile', responses: { 200: ok('Updated') } },
+      post: {
+        tags: ['Buyer Profiles'],
+        summary: 'Create buyer profile',
+        responses: { 201: ok('Created') },
+      },
+      get: {
+        tags: ['Buyer Profiles'],
+        summary: 'Get buyer profile',
+        responses: { 200: ok('Profile') },
+      },
+      patch: {
+        tags: ['Buyer Profiles'],
+        summary: 'Update buyer profile',
+        responses: { 200: ok('Updated') },
+      },
     },
     '/buyers/demands': {
-      post: { tags: ['Buyer Profiles'], summary: 'Create demand', responses: { 201: ok('Created') } },
+      post: {
+        tags: ['Buyer Profiles'],
+        summary: 'Create demand',
+        responses: { 201: ok('Created') },
+      },
       get: { tags: ['Buyer Profiles'], summary: 'List demands', responses: { 200: ok('Demands') } },
     },
     '/buyers/recommendations': {
-      get: { tags: ['Matching'], summary: 'AI-ranked recommendations', responses: { 200: ok('Recommendations') } },
+      get: {
+        tags: ['Matching'],
+        summary: 'AI-ranked recommendations',
+        responses: { 200: ok('Recommendations') },
+      },
     },
     '/listings/extract': {
       post: {
@@ -226,7 +268,11 @@ function buildPaths(): Record<string, unknown> {
       },
     },
     '/marketplace/listings': {
-      get: { tags: ['Marketplace'], summary: 'Browse published listings', responses: { 200: ok('Listings') } },
+      get: {
+        tags: ['Marketplace'],
+        summary: 'Browse published listings',
+        responses: { 200: ok('Listings') },
+      },
     },
     '/offers': {
       post: {
@@ -245,10 +291,18 @@ function buildPaths(): Record<string, unknown> {
       },
     },
     '/farmers/transactions': {
-      get: { tags: ['Transactions'], summary: 'Farmer transactions', responses: { 200: ok('Transactions') } },
+      get: {
+        tags: ['Transactions'],
+        summary: 'Farmer transactions',
+        responses: { 200: ok('Transactions') },
+      },
     },
     '/notifications': {
-      get: { tags: ['Notifications'], summary: 'List notifications', responses: { 200: ok('Notifications') } },
+      get: {
+        tags: ['Notifications'],
+        summary: 'List notifications',
+        responses: { 200: ok('Notifications') },
+      },
     },
     '/admin/dashboard': {
       get: { tags: ['Admin'], summary: 'Admin metrics', responses: { 200: ok('Metrics') } },

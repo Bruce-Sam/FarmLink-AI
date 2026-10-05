@@ -85,10 +85,7 @@ export class TransportService {
     const farmerId = await farmersService.requireProfileId(userId);
     return prisma.transportPoolSuggestion.findMany({
       where: {
-        OR: [
-          { primaryListing: { farmerId } },
-          { secondaryListing: { farmerId } },
-        ],
+        OR: [{ primaryListing: { farmerId } }, { secondaryListing: { farmerId } }],
       },
       orderBy: { createdAt: 'desc' },
       include: {

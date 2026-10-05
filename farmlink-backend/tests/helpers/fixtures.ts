@@ -113,7 +113,9 @@ export function buildMockPrisma() {
     $transaction: vi.fn(),
   };
 
-  mock.$transaction.mockImplementation(async (fn: (tx: typeof mock) => unknown) => fn(buildMockPrisma()));
+  mock.$transaction.mockImplementation(async (fn: (tx: typeof mock) => unknown) =>
+    fn(buildMockPrisma()),
+  );
 
   return mock;
 }

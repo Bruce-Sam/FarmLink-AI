@@ -8,7 +8,11 @@ import {
   type ExtractionResult,
 } from './ai/extraction.schema';
 
-export { extractionInputSchema, type ExtractionInput, type ExtractionResult } from './ai/extraction.schema';
+export {
+  extractionInputSchema,
+  type ExtractionInput,
+  type ExtractionResult,
+} from './ai/extraction.schema';
 
 // Validates any provider output against the strict schema. Never trust raw AI.
 function validateExtraction(raw: unknown): ExtractionResult {
