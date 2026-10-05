@@ -32,25 +32,24 @@ export const createDemandSchema = z
     frequency: z.string().trim().max(50).optional(),
     isActive: z.boolean().default(true),
   })
-  .refine(
-    (d) => d.maximumQuantity === undefined || d.maximumQuantity >= d.minimumQuantity,
-    { message: 'maximumQuantity must be greater than or equal to minimumQuantity', path: ['maximumQuantity'] },
-  );
-
-export const updateDemandSchema = z
-  .object({
-    categoryId: z.string().uuid().optional(),
-    minimumQuantity: z.coerce.number().positive().max(1_000_000).optional(),
-    maximumQuantity: z.coerce.number().positive().max(1_000_000).optional(),
-    unit: z.nativeEnum(ProduceUnit).optional(),
-    preferredPriceMaximum: z.coerce.number().positive().max(10_000_000).optional(),
-    requiredFrom: z.coerce.date().optional(),
-    requiredUntil: z.coerce.date().optional(),
-    preferredRegions: z.array(z.string().trim().min(1)).max(20).optional(),
-    isRecurring: z.boolean().optional(),
-    frequency: z.string().trim().max(50).optional(),
-    isActive: z.boolean().optional(),
+  .refine((d) => d.maximumQuantity === undefined || d.maximumQuantity >= d.minimumQuantity, {
+    message: 'maximumQuantity must be greater than or equal to minimumQuantity',
+    path: ['maximumQuantity'],
   });
+
+export const updateDemandSchema = z.object({
+  categoryId: z.string().uuid().optional(),
+  minimumQuantity: z.coerce.number().positive().max(1_000_000).optional(),
+  maximumQuantity: z.coerce.number().positive().max(1_000_000).optional(),
+  unit: z.nativeEnum(ProduceUnit).optional(),
+  preferredPriceMaximum: z.coerce.number().positive().max(10_000_000).optional(),
+  requiredFrom: z.coerce.date().optional(),
+  requiredUntil: z.coerce.date().optional(),
+  preferredRegions: z.array(z.string().trim().min(1)).max(20).optional(),
+  isRecurring: z.boolean().optional(),
+  frequency: z.string().trim().max(50).optional(),
+  isActive: z.boolean().optional(),
+});
 
 export type CreateBuyerProfileInput = z.infer<typeof createBuyerProfileSchema>;
 export type UpdateBuyerProfileInput = z.infer<typeof updateBuyerProfileSchema>;

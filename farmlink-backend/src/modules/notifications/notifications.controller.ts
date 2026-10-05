@@ -30,7 +30,10 @@ export const getUnreadCount = asyncHandler(async (req: Request, res: Response) =
 });
 
 export const markNotificationRead = asyncHandler(async (req: Request, res: Response) => {
-  const updated = await notificationService.markAsRead(requireUserId(req), getParam(req, 'notificationId'));
+  const updated = await notificationService.markAsRead(
+    requireUserId(req),
+    getParam(req, 'notificationId'),
+  );
   if (!updated) throw ApiError.notFound('Notification not found');
   successResponse(res, { message: 'Notification marked as read', data: { updated: true } });
 });

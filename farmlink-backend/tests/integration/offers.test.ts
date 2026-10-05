@@ -1,10 +1,5 @@
 import { describe, it, expect, vi, beforeEach } from 'vitest';
-import {
-  ListingStatus,
-  OfferStatus,
-  ProduceUnit,
-  TransactionStatus,
-} from '@prisma/client';
+import { ListingStatus, OfferStatus, ProduceUnit, TransactionStatus } from '@prisma/client';
 import { mockPrisma } from '../setup';
 import {
   buildMockPrisma,

@@ -1,10 +1,7 @@
 import { type FarmerProfile } from '@prisma/client';
 import { prisma } from '../../config/database';
 import { ApiError } from '../../utils/api-error';
-import {
-  type CreateFarmerProfileInput,
-  type UpdateFarmerProfileInput,
-} from './farmers.schema';
+import { type CreateFarmerProfileInput, type UpdateFarmerProfileInput } from './farmers.schema';
 
 export class FarmersService {
   async createProfile(userId: string, input: CreateFarmerProfileInput): Promise<FarmerProfile> {
