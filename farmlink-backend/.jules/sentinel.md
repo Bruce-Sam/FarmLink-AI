@@ -1,0 +1,4 @@
+## 2023-10-07 - Reject Default ADMIN_PASSWORD in Production
+**Vulnerability:** The application was allowing the default administrative password ('AdminPassword123!') to be used when running in production mode (`NODE_ENV='production'`). While there was a check for default JWT secrets, the admin password check was missing.
+**Learning:** Default configuration secrets must not only be validated for length/format but explicitly rejected in production environments to prevent accidental insecure deployments.
+**Prevention:** Implement strict start-up checks for all critical secrets in the configuration module before database connections or application boot logic occur. These checks should throw an error and halt start-up if `isProduction` is true and a known default value is detected.
