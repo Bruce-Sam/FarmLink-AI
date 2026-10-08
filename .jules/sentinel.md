@@ -1,0 +1,4 @@
+## 2025-02-23 - Prevent default ADMIN_PASSWORD in production
+**Vulnerability:** The application was not rejecting the default `ADMIN_PASSWORD` ('AdminPassword123!') in production environments, potentially allowing an attacker to gain admin access.
+**Learning:** Security configuration checks (such as validating production secrets) must occur early in the application lifecycle, prior to database connections or account initialization, to prevent the system from entering a temporary insecure state. We should also enforce this restriction using Vitest by calling `vi.resetModules()` to re-evaluate the configuration module in tests.
+**Prevention:** Include validation checks directly in the main environment configuration module (`src/config/env.ts`) to immediately throw an error when running in production with default secrets.
